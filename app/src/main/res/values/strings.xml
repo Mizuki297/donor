@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">My Application</string>
+    <string name="add_data_cat">add_data_cat</string>
+    <string name="search_data_cat">search_data_cat</string>
+    <string name="menu_user">menu_user</string>
+    <string name="textview">ค้นหาข้อมูลแมว</string>
+    <string name="text_bloodtype">กรุ๊ปเลือดแมว</string>
+    <string name="radiobutton">A</string>
+    <string name="radiobutton2">B</string>
+    <string name="radiobutton3">AB</string>
+    <string name="search_button">ค้นหา</string>
+    <string name="button_add" />
+</resources>
