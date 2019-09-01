@@ -37,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String[]arr ={"กรุณาเลือกสถานที่รักษา","โรงพยาบาลปทุมเวช","โรงพยาบาลสัตว์ไอเวท"};
+    public String[]arr ={"กรุณาเลือกสถานที่รักษา","โรงพยาบาลสัตว์ธัญญมิตร","โรงพยาบาลสัตว์บ้านฟ้า"};
 
     private PHPServiceAPI phpServiceAPI;
 
@@ -123,15 +123,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void createPost() {
-        final PostData post = new PostData(1,"Blood_type","HPT_name","new Text");
+        final PostData post = new PostData(1,radioButton.getText().toString(),text,"new Text");
 
-        Map<String, String> fields = new HashMap<>();
-        fields.put("user_id","1");
-        fields.put("Blood_type","");
-        fields.put("HPT_name","");
+//        Map<String, String> fields = new HashMap<>();
+//        fields.put("user_id","1");
+//        fields.put("Blood_type","");
+//        fields.put("HPT_name","");
 
 
-        Call<PostData> call = phpServiceAPI.createPost(fields);
+        Call<PostData> call = phpServiceAPI.createPost(post);
 
         call.enqueue(new Callback<PostData>() {
             @Override
