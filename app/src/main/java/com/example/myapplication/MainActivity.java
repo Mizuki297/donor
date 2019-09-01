@@ -15,8 +15,19 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.Request;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,9 +53,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Gson gson = new GsonBuilder().serializeNulls().create();
+
+        // log
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @NotNull
+                    @Override
+                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
+                        Request originalRequest = chain.request();
+
+                        Request newRequest = originalRequest.newBuilder()
+                                .header("Interceptor-Header", "xyz")
+                                .build();
+                        return chain.proceed(newRequest);
+                    }
+                })
+                .addInterceptor(loggingInterceptor)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://glyphographic-runwa.000webhostapp.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         phpServiceAPI = retrofit.create(PHPServiceAPI.class);
@@ -90,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void createPost() {
-        final Request post = new Request(1,"Blood_type","HPT_name","new Text");
+        final PostData post = new PostData(1,"Blood_type","HPT_name","new Text");
 
         Map<String, String> fields = new HashMap<>();
         fields.put("user_id","1");
@@ -98,25 +131,26 @@ public class MainActivity extends AppCompatActivity {
         fields.put("HPT_name","");
 
 
-        Call<Request> call = phpServiceAPI.createPost(fields);
+        Call<PostData> call = phpServiceAPI.createPost(fields);
 
-        call.enqueue(new Callback<Request>() {
+        call.enqueue(new Callback<PostData>() {
             @Override
-            public void onResponse(Call<Request> call, Response<Request> response) {
+            public void onResponse(Call<PostData> call, Response<PostData> response) {
 
-                if (!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"Code: "+ response.code(),Toast.LENGTH_SHORT).show();
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Request postResponse = response.body();
+                PostData postData = response.body();
+
                 String content ="";
-                content += "user_id "+ postResponse.getUser_id()+"\n";
-                content += "Blood_type "+ postResponse.getBlood_type()+"\n";
-                content += "HPT_name "+ postResponse.getHPT_name()+"\n";
+                content += "user_id "+ postData.getUser_id()+"\n";
+                content += "Blood_type "+ postData.getBlood_type()+"\n";
+                content += "HPT_name "+ postData.getHPT_name()+"\n";
             }
 
             @Override
-            public void onFailure(Call<Request> call, Throwable t) {
+            public void onFailure(Call<PostData> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

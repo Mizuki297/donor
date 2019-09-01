@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Request {
+public class PostData {
 
     private int user_id;
     private String blood_type, HPT_name;
@@ -10,7 +10,7 @@ public class Request {
     @SerializedName("body")
     private String text;
 
-    public Request(int user_id, String blood_type, String HPT_name, String text) {
+    public PostData(int user_id, String blood_type, String HPT_name, String text) {
         this.user_id = user_id;
         this.blood_type = blood_type;
         this.HPT_name = HPT_name;
