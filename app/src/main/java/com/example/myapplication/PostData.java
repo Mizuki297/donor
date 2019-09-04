@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import com.google.gson.annotations.SerializedName;
-
 public class PostData {
 
     private int user_id;

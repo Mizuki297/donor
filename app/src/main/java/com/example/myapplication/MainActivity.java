@@ -39,12 +39,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     //ประกาศค่าต่างๆที่ต้องการใช้
-
     private ArrayList<String> hospitalList = new ArrayList<>();
 
     private PHPServiceAPI phpServiceAPI;
 
     private RadioGroup radioGroup;
+
     private RadioButton radioButton;
 
     private Button search;
@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://glyphographic-runwa.000webhostapp.com")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-
-        phpServiceAPI = retrofit.create(PHPServiceAPI.class);
 
         // Call get hospital
         phpServiceAPI = retrofit.create(PHPServiceAPI.class);
@@ -138,39 +136,40 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
-                createPost();
+
+                //เช็กค่าว่าง
+                if (radioGroup.getCheckedRadioButtonId() == -1 || selectHospital == "กรุณาเลือกสถานที่รักษา"){
+                    Toast.makeText(getApplicationContext(), "กรุณาเลือกชื่อโรงพยาบาลหรือกรุ๊ปเลือดให้ครบ", Toast.LENGTH_SHORT).show();
+                }else {
+                    //เรียกใช้งานฟังก์ชันโดยโยน พารามิเตอร์ 2 ค่า
+                    createPost(selectHospital,radioButton.getText().toString());
+                }
+
+                System.out.println(selectHospital);
+                System.out.println(radioGroup.getCheckedRadioButtonId());
             }
         });
     }//สร้างต่วส่งข้อมูลไป api
-    private void createPost() {
-        final PostData post = new PostData(""+selectHospital,""+radioButton.getText().toString(),1);
-
-        Call<PostData> call = phpServiceAPI.createPost(post);
-
-        call.enqueue(new Callback<PostData>() {
+    //สร้างฟังก์ชัน สำหรับสร้าตัวบันทึกข้อมูล โดยรับค่า 2 ค่า
+    private void createPost(String HPT,String Blood) {
+        //เรียกใช้ service createPost
+        Call<Void> call = phpServiceAPI.createPost(HPT,Blood,1);
+        //รอการตอบกลับจาก API
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<PostData> call, Response<PostData> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
-                if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                PostData postData = response.body();
-
-                String content ="";
-                content += "user_id "+ postData.getUser_id()+"\n";
-                content += "Blood_type "+ postData.getBlood_type()+"\n";
-                content += "HPT_name "+ postData.getHPT_name()+"\n";
-
-                System.out.println(content);
             }
 
             @Override
-            public void onFailure(Call<PostData> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
+
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
             }
         });
+        //แสดงกรณีบันทึกสำเร็จ
+Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
     }
 
 //เปลี่ยนหน้า
@@ -204,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
 
                     hospitalList.add(post.getHPT_name());
                 }
-
             }
 
             @Override
