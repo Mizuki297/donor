@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.provider.Settings;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerHospital;
 
+    private String coin;
+
+    private int userID;
+
     // ส่วนหลัก
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
         hospitalList.add("กรุณาเลือกสถานที่รักษา");
+        //Get User
+        getUser();
         // Get Hospital list from api
         getHospitalList();
 
@@ -130,23 +137,24 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 radioButton = (RadioButton) findViewById(i);
 //                Toast.makeText(getBaseContext(), radioButton.getText(), Toast.LENGTH_SHORT).show();
+                System.out.println(radioButton.getText().toString());
             }
         });
         //กดปุ่มค้นหา
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //เช็กค่าว่าง
                 if (radioGroup.getCheckedRadioButtonId() == -1 || selectHospital == "กรุณาเลือกสถานที่รักษา"){
                     Toast.makeText(getApplicationContext(), "กรุณาเลือกชื่อโรงพยาบาลหรือกรุ๊ปเลือดให้ครบ", Toast.LENGTH_SHORT).show();
                 }else {
                     //เรียกใช้งานฟังก์ชันโดยโยน พารามิเตอร์ 2 ค่า
-                    createPost(selectHospital,radioButton.getText().toString());
+//                    createPost(selectHospital,radioButton.getText().toString());
+                    onClick_button_search();
                 }
 
-                System.out.println(selectHospital);
-                System.out.println(radioGroup.getCheckedRadioButtonId());
+//                System.out.println(selectHospital);
+//                System.out.println(radioButton.getText().toString());
             }
         });
     }//สร้างต่วส่งข้อมูลไป api
@@ -173,11 +181,18 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
     }
 
 //เปลี่ยนหน้า
-    public void onClick_button_add (View view){
+    public void onClick_button_add (){
         Button btn_next = (Button)findViewById(R.id.button_add);
         Intent intent = new Intent();
         startActivity(intent);
-        finish();
+    }
+    public void onClick_button_search (){
+        Intent intent = new Intent(this, PayDataCat.class);
+        intent.putExtra("coin",coin);
+        intent.putExtra("user_id",userID);
+        intent.putExtra("HPT_name",selectHospital);
+        intent.putExtra("Blood_type",radioButton.getText().toString());
+        startActivity(intent);
     }
 //ดึงข้อมูลจาก api
     private void getHospitalList() {
@@ -207,6 +222,42 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
 
             @Override
             public void onFailure(Call<List<Hospital>> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+    private void getUser() {
+        Call<List<User>> call = phpServiceAPI.getUser();
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (!response.isSuccessful()) {
+                    // textViewResult.setText("Code: " + response.code());
+                    return;
+                }
+
+                List<User> getList = response.body();
+
+                for (User post: getList) {
+                    String content = "";
+                    content += "user_id: " + post.getUser_id() + "\n";
+                    content += "user_name: " + post.getUser_name() + "\n";
+                    content += "user_s_name: " + post.getUser_s_name() + "\n";
+                    content += "user_tel: "  + post.getUser_tel() + "\n";
+                    content += "user_username: " + post.getUser_username() + "\n";
+                    content += "user_password: " + post.getUser_password() + "\n";
+                    content += "user_line_id: " + post.getUser_line_id() + "\n";
+                    content += "user_Money_coin: " + post.getMoney_coin() + "\n";
+
+                    System.out.println(content);
+                    coin = post.getMoney_coin();
+                    userID = post.getUser_id();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
