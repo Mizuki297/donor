@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerHospital;
 
-    private String coin;
-
-    private int userID = 0;
+    private String userID;
 
     // ส่วนหลัก
     @Override
@@ -187,7 +185,6 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
     }
     public void onClick_button_search (){
         Intent intent = new Intent(this, PayDataCat.class);
-        intent.putExtra("coin",coin);
         intent.putExtra("user_id",userID);
         intent.putExtra("HPT_name",selectHospital);
         intent.putExtra("Blood_type",radioButton.getText().toString());
@@ -226,7 +223,7 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
         });
     }
     private void getUser() {
-        Call<List<User>> call = phpServiceAPI.getUser(1);
+        Call<List<User>> call = phpServiceAPI.getUser("1");
 
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -241,16 +238,8 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
                 for (User post: getList) {
                     String content = "";
                     content += "user_id: " + post.getUser_id() + "\n";
-                    content += "user_name: " + post.getUser_name() + "\n";
-                    content += "user_s_name: " + post.getUser_s_name() + "\n";
-                    content += "user_tel: "  + post.getUser_tel() + "\n";
-                    content += "user_username: " + post.getUser_username() + "\n";
-                    content += "user_password: " + post.getUser_password() + "\n";
-                    content += "user_line_id: " + post.getUser_line_id() + "\n";
-                    content += "user_Money_coin: " + post.getMoney_coin() + "\n";
 
                     System.out.println(content);
-                    coin = post.getMoney_coin();
                     userID = post.getUser_id();
                 }
             }

@@ -23,7 +23,13 @@ public interface PHPServiceAPI {
     @FormUrlEncoded
     @POST("/api/get_post_user.php")
     Call<List<User>> getUser(
-            @Field("user_id") int user_id
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST("/api/update_coin.php")
+    Call<Void> updateCoin(
+            @Field("user_id")String user_id
     );
 
 //    @GET("/api/get_post_user.php")
@@ -33,7 +39,7 @@ public interface PHPServiceAPI {
     @FormUrlEncoded
     @POST("/api/select_data.php")
     Call<List<NumCat>> numCat(
-            @Field("user_id") int user_id,
+            @Field("user_id") String user_id,
             @Field("HPT_name") String HPT_name,
             @Field("Blood_type") String Blood_type
 

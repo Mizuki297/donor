@@ -74,8 +74,7 @@ public class PayDataCat extends AppCompatActivity {
         // Call get hospital
         phpServiceAPI = retrofit.create(PHPServiceAPI.class);
 
-        String getCoin = getIntent().getExtras().getString("coin");
-        int getUserID = getIntent().getExtras().getInt("user_id");
+        final String getUserID = getIntent().getExtras().getString("user_id");
         String getHPT_name = getIntent().getExtras().getString("HPT_name");
         String getBlood_type = getIntent().getExtras().getString("Blood_type");
 
@@ -83,8 +82,9 @@ public class PayDataCat extends AppCompatActivity {
         System.out.println(getHPT_name);
         System.out.println(getBlood_type);
 
+        getCoin();
+
         user_coin = (TextView) findViewById(R.id.textView4);
-        user_coin.setText(getCoin);
 //        if (getCoin != 0 ){
 //        coin.setText(getCoin);
 //        }else{coin.setText(0);}
@@ -105,17 +105,35 @@ public class PayDataCat extends AppCompatActivity {
         pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                onClickPay();
-
+                updateCoin(getUserID);
+//                onNextSelect();
             }
         });
     }
-//    public void onClickPay() {
+    public void onNextSelect() {
 //        Intent intent = new Intent();
 //        startActivity(intent);
-//    }
+    }
+    private void updateCoin(String user_id){
+        Call<Void> call = phpServiceAPI.updateCoin(user_id);
 
-    private void numCat(int getUserID,String getHPT_name,String getBlood_type) {
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
+            }
+        });
+        Toast.makeText(getApplicationContext(),"ชำระเงินสำเร็จ",Toast.LENGTH_SHORT).show();
+    }
+
+    private void numCat(String getUserID,String getHPT_name,String getBlood_type) {
         Call<List<NumCat>> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
         //รอการตอบกลับจาก API
         call.enqueue(new Callback<List<NumCat>>() {
@@ -142,8 +160,33 @@ public class PayDataCat extends AppCompatActivity {
                 System.out.println(t.getMessage());
             }
         });
-        //แสดงกรณีบันทึกสำเร็จ
-//        Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
+    }
+    private void getCoin() {
+        Call<List<User>> call = phpServiceAPI.getUser("1");
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (!response.isSuccessful()) {
+                    // textViewResult.setText("Code: " + response.code());
+                    return;
+                }
+
+                List<User> getList = response.body();
+
+                for (User post: getList) {
+                    String content = "";
+                    content += "money_coin: " + post.getMoney_coin() + "\n";
+
+                    System.out.println(content);
+                    user_coin.setText(post.getMoney_coin());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
     }
 
 }
