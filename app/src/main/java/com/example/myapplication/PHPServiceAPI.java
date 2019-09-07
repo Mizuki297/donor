@@ -20,15 +20,22 @@ public interface PHPServiceAPI {
     @GET("/api/get_post_hpt.php")
     Call<List<Hospital>> getHospital();
 
-    @GET("/api/get_post_user.php")
-    Call<List<User>> getUser();
+    @FormUrlEncoded
+    @POST("/api/get_post_user.php")
+    Call<List<User>> getUser(
+            @Field("user_id") int user_id
+    );
+
+//    @GET("/api/get_post_user.php")
+//    Call<List<User>> getUser();
 
     //บัคการส่งข้อมูล
-    @GET("/api/select_data.php")
+    @FormUrlEncoded
+    @POST("/api/select_data.php")
     Call<List<NumCat>> numCat(
-            @Part("user_id") int user_id,
-            @Part("HPT_name") String HPT_name,
-            @Part("Blood_type") String Blood_type
+            @Field("user_id") int user_id,
+            @Field("HPT_name") String HPT_name,
+            @Field("Blood_type") String Blood_type
 
     );
 

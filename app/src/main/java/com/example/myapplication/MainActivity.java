@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String coin;
 
-    private int userID;
+    private int userID = 0;
 
     // ส่วนหลัก
     @Override
@@ -149,12 +149,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "กรุณาเลือกชื่อโรงพยาบาลหรือกรุ๊ปเลือดให้ครบ", Toast.LENGTH_SHORT).show();
                 }else {
                     //เรียกใช้งานฟังก์ชันโดยโยน พารามิเตอร์ 2 ค่า
+                    System.out.println(selectHospital);
+                    System.out.println(radioButton.getText().toString());
 //                    createPost(selectHospital,radioButton.getText().toString());
                     onClick_button_search();
                 }
-
-//                System.out.println(selectHospital);
-//                System.out.println(radioButton.getText().toString());
             }
         });
     }//สร้างต่วส่งข้อมูลไป api
@@ -227,7 +226,7 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
         });
     }
     private void getUser() {
-        Call<List<User>> call = phpServiceAPI.getUser();
+        Call<List<User>> call = phpServiceAPI.getUser(1);
 
         call.enqueue(new Callback<List<User>>() {
             @Override

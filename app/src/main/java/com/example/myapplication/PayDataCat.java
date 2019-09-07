@@ -32,9 +32,11 @@ public class PayDataCat extends AppCompatActivity {
 
     private PHPServiceAPI phpServiceAPI;
 
-    private TextView numCat, coin;
+    public TextView numCat_select, user_coin;
 
-    private ImageView back;
+    public ImageView back_icon;
+
+    public Button pay_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,29 +74,48 @@ public class PayDataCat extends AppCompatActivity {
         // Call get hospital
         phpServiceAPI = retrofit.create(PHPServiceAPI.class);
 
-        String getcoin = getIntent().getExtras().getString("coin");
-        int getUserID = getIntent().getExtras().getInt("user.id");
+        String getCoin = getIntent().getExtras().getString("coin");
+        int getUserID = getIntent().getExtras().getInt("user_id");
         String getHPT_name = getIntent().getExtras().getString("HPT_name");
         String getBlood_type = getIntent().getExtras().getString("Blood_type");
 
-        coin = (TextView) findViewById(R.id.textView4);
-        coin.setText(getcoin);
+        System.out.println(getUserID);
+        System.out.println(getHPT_name);
+        System.out.println(getBlood_type);
 
-        numCat = (TextView) findViewById(R.id.textView8);
+        user_coin = (TextView) findViewById(R.id.textView4);
+        user_coin.setText(getCoin);
+//        if (getCoin != 0 ){
+//        coin.setText(getCoin);
+//        }else{coin.setText(0);}
 
-//        numCat(getUserID,getHPT_name,getBlood_type);
+        numCat_select = (TextView) findViewById(R.id.textView8);
 
-        back = (ImageView) findViewById(R.id.imageView2);
-        back.setOnClickListener(new View.OnClickListener() {
+        numCat(getUserID,getHPT_name,getBlood_type);
+
+        back_icon = (ImageView) findViewById(R.id.imageView2);
+        back_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+
+        pay_button = (Button) findViewById(R.id.button);
+        pay_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onClickPay();
+
+            }
+        });
     }
+//    public void onClickPay() {
+//        Intent intent = new Intent();
+//        startActivity(intent);
+//    }
 
     private void numCat(int getUserID,String getHPT_name,String getBlood_type) {
-        //เรียกใช้ service createPost
         Call<List<NumCat>> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
         //รอการตอบกลับจาก API
         call.enqueue(new Callback<List<NumCat>>() {
@@ -109,18 +130,9 @@ public class PayDataCat extends AppCompatActivity {
                 for (NumCat post : getList) {
                     String content = "";
                     content += "numCat: " + post.getNumCat() + "\n";
-                    content += "cat_id: " + post.getCat_id() + "\n";
-                    content += "url_cat: " + post.getUrl_cat() + "\n";
-                    content += "blood_type: " + post.getBlood_type() + "\n";
-                    content += "cat_type: " + post.getCat_type() + "\n";
-                    content += "Cat_weight: " + post.getCat_weight() + "\n";
-                    content += "Cat_bd: " + post.getCat_bd() + "\n";
-                    content += "Health_check_date: " + post.getHealth_check_date() + "\n";
-                    content += "Latest_donation: " + post.getLatest_donation() + "\n";
-                    content += "Status_cat: " + post.getStatus_cat() + "\n";
 
                     System.out.println(content);
-                    numCat.setText(post.getNumCat());
+                    numCat_select.setText(post.getNumCat());
                 }
             }
             @Override
