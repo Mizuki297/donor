@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String userID;
 
+    private View button_add;
+
     // ส่วนหลัก
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
         phpServiceAPI = retrofit.create(PHPServiceAPI.class);
 
         search = (Button) findViewById(R.id.search_button);
+
+        button_add = (View) findViewById(R.id.main_menu1);
+        button_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onClick_button_add();
+            }
+        });
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
@@ -179,7 +189,6 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
 
 //เปลี่ยนหน้า
     public void onClick_button_add (){
-        Button btn_next = (Button)findViewById(R.id.button_add);
         Intent intent = new Intent();
         startActivity(intent);
     }

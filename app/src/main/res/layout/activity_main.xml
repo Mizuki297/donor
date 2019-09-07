@@ -34,29 +34,29 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="10dp"
         android:background="#F0E8E8"
-        app:layout_constraintBottom_toTopOf="@+id/imageIcon_search"
+        app:layout_constraintBottom_toTopOf="@+id/text_bloodtype"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintTop_toBottomOf="@+id/main_header" />
 
     <TextView
         android:id="@+id/text_bloodtype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/text_bloodtype"
         android:textColor="@color/textcolor"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/bloodtype_group"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_search_HPT" />
 
@@ -65,13 +65,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/search_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_bloodtype">
 
         <RadioButton
             android:id="@+id/A_button"
@@ -101,8 +103,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="200dp"
         android:background="@color/buttoncolor"
         android:text="@string/search_button"
         android:textColor="@color/textcolor2"
@@ -110,15 +113,16 @@
         app:layout_constraintBottom_toTopOf="@+id/main_menu2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.918"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bloodtype_group" />
 
     <View
         android:id="@+id/main_menu1"
-        android:layout_width="138dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="0dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_menu2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -132,21 +136,9 @@
         app:layout_constraintTop_toTopOf="@+id/main_menu1"
         app:srcCompat="@drawable/edit_121277" />
 
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="137dp"
-        android:layout_height="60dp"
-        android:background="#00FFFFFF"
-        android:text="@string/button_add"
-        app:layout_constraintBottom_toBottomOf="@+id/main_menu1"
-        app:layout_constraintEnd_toEndOf="@+id/main_menu1"
-        app:layout_constraintStart_toStartOf="@+id/main_menu1"
-        app:layout_constraintTop_toTopOf="@+id/main_menu1"
-        app:layout_constraintVertical_bias="0.0" />
-
     <View
         android:id="@+id/main_menu2"
-        android:layout_width="138dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,11 +159,12 @@
 
     <View
         android:id="@+id/main_menu3"
-        android:layout_width="138dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_menu2" />
 
     <ImageView
         android:id="@+id/imageIcon_user"
