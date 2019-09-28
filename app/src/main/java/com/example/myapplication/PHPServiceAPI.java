@@ -25,16 +25,11 @@ public interface PHPServiceAPI {
     Call<List<User>> getUser(
             @Field("user_id") String user_id
     );
-
     @FormUrlEncoded
     @POST("/api/update_coin.php")
     Call<Void> updateCoin(
             @Field("user_id")String user_id
     );
-
-//    @GET("/api/get_post_user.php")
-//    Call<List<User>> getUser();
-
     //บัคการส่งข้อมูล
     @FormUrlEncoded
     @POST("/api/select_data.php")
@@ -44,10 +39,6 @@ public interface PHPServiceAPI {
             @Field("Blood_type") String Blood_type
 
     );
-
-    @POST("/api/get_post_request.php")
-    Call<PostData> createPost(@Body PostData post);
-
     // เชื่อมต่อกับ PHPService โดยส่งข้อมูลแบบ From-data
     // /api/get_post_request.php?HPT_name="ชื่อโรงพยาบาล*"&Blood_type="กรุ๊ปเลือ"&user_id=""
     @FormUrlEncoded

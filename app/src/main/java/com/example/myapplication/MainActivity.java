@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         //แสดงกรณีบันทึกสำเร็จ
 Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
     }
-
 //เปลี่ยนหน้า
     public void onClick_button_add (){
         Intent intent = new Intent();
@@ -247,6 +246,8 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
                 for (User post: getList) {
                     String content = "";
                     content += "user_id: " + post.getUser_id() + "\n";
+                    content += "user_name: " + post.getUser_name() + "\n";
+                    content += "money_coin: " + post.getMoney_coin() + "\n";
 
                     System.out.println(content);
                     userID = post.getUser_id();
