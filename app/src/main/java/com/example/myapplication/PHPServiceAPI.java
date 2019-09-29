@@ -54,7 +54,7 @@ public interface PHPServiceAPI {
     @POST("api/select_Cat.php")
     Call<List<CatModel>> getcat_list(
             @Field("HPT_id") String user_id,
-            @Field("blood_type") String HPT_name
+            @Field("blood_type") String blood_type
     );
 
     @FormUrlEncoded

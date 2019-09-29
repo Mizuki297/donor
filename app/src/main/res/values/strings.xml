@@ -22,4 +22,17 @@
     <string name="textview6">10</string>
     <string name="textview7">เพื่อเข้าถึงข้อมูล</string>
     <string name="button_pay">ยืนยัน</string>
+
+    <string name="cat_name">ชื่อแมว</string>
+    <string name="cat_type">สายพันธุ์ </string>
+    <string name="cat_blood">กรุ๊ปเลือด</string>
+    <string name="cat_age">อายุ</string>
+    <string name="cat_weight">น้ำหนัก</string>
+    <string name="cat_Health_check_date">วันที่ตรวจสุขภาพ</string>
+    <string name="cat_Latest_donation">วันที่บริจาคเลือดล่าสุด</string>
+    <string name="Line">Line</string>
+    <string name="Search">ผลการค้นหา</string>
+    <string name="tell_button">tell_button</string>
+    <string name="cat_pic">Cat_pic</string>
+    <string name="line_icon">Line_icon</string>
 </resources>

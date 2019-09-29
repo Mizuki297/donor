@@ -43,40 +43,12 @@ public class PayDataCat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_data_cat);
 
-        Gson gson = new GsonBuilder().serializeNulls().create();
-
-        // log
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @NotNull
-                    @Override
-                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
-
-                        Request newRequest = originalRequest.newBuilder()
-                                .header("Interceptor-Header", "xyz")
-                                .build();
-                        return chain.proceed(newRequest);
-                    }
-                })
-                .addInterceptor(loggingInterceptor)
-                .build();
-
-        //ประกาศค่า url
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://glyphographic-runwa.000webhostapp.com")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
         // Call get hospital
-        phpServiceAPI = retrofit.create(PHPServiceAPI.class);
+        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
         final String getUserID = getIntent().getExtras().getString("user_id");
         String getHPT_name = getIntent().getExtras().getString("HPT_name");
-        String getBlood_type = getIntent().getExtras().getString("Blood_type");
+        final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
         System.out.println(getUserID);
         System.out.println(getHPT_name);
@@ -105,14 +77,15 @@ public class PayDataCat extends AppCompatActivity {
         pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateCoin(getUserID);
-//                onNextSelect();
+//                updateCoin(getUserID);
+                onNextSelect(getBlood_type);
             }
         });
     }
-    public void onNextSelect() {
-//        Intent intent = new Intent();
-//        startActivity(intent);
+    public void onNextSelect(String blood_type) {
+        Intent intent = new Intent(this,cat_list.class);
+        intent.putExtra("blood_type",blood_type);
+        startActivity(intent);
     }
     private void updateCoin(String user_id){
         Call<Void> call = phpServiceAPI.updateCoin(user_id);

@@ -64,37 +64,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //แก้ไขค่าต่างๆ
-        Gson gson = new GsonBuilder().serializeNulls().create();
-
-        // log
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @NotNull
-                    @Override
-                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
-
-                        Request newRequest = originalRequest.newBuilder()
-                                .header("Interceptor-Header", "xyz")
-                                .build();
-                        return chain.proceed(newRequest);
-                    }
-                })
-                .addInterceptor(loggingInterceptor)
-                .build();
-
-        //ประกาศค่า url
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://glyphographic-runwa.000webhostapp.com")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        // Call get hospital
-        phpServiceAPI = retrofit.create(PHPServiceAPI.class);
+        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -195,7 +165,7 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
         Intent intent = new Intent(this, PayDataCat.class);
         intent.putExtra("user_id",userID);
         intent.putExtra("HPT_name",selectHospital);
-        intent.putExtra("Blood_type",radioButton.getText().toString());
+        intent.putExtra("blood_type",radioButton.getText().toString());
         startActivity(intent);
     }
 //ดึงข้อมูลจาก api
