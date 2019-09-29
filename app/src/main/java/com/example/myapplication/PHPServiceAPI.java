@@ -39,8 +39,7 @@ public interface PHPServiceAPI {
             @Field("Blood_type") String Blood_type
 
     );
-    // เชื่อมต่อกับ PHPService โดยส่งข้อมูลแบบ From-data
-    // /api/get_post_request.php?HPT_name="ชื่อโรงพยาบาล*"&Blood_type="กรุ๊ปเลือ"&user_id=""
+
     @FormUrlEncoded
     @POST("/api/get_post_request.php")
     Call<Void> createPost(
@@ -49,5 +48,18 @@ public interface PHPServiceAPI {
             @Field("Blood_type")String Blood_type,
 
             @Field("user_id")int user_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/select_Cat.php")
+    Call<List<CatModel>> getcat_list(
+            @Field("HPT_id") String user_id,
+            @Field("blood_type") String HPT_name
+    );
+
+    @FormUrlEncoded
+    @POST("api/show_data_cat.php")
+    Call<CatModel> getCatDetail(
+            @Field("cat_id") String cat_id
     );
 }
