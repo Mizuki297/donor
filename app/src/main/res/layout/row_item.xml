@@ -28,7 +28,7 @@
         android:src="@drawable/shape_button"
         android:text="@string/cat_name"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="18sp"
 
 
         />
