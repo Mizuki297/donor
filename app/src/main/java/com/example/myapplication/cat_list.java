@@ -37,9 +37,10 @@ public class cat_list extends AppCompatActivity {
 
         PHPServiceAPI phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
+        final String getHPT_name = getIntent().getExtras().getString("HPT_name");
         final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
-        Call<List<CatModel>> call = phpServiceAPI.getcat_list("1", getBlood_type);
+        Call<List<CatModel>> call = phpServiceAPI.getcat_list(getHPT_name, getBlood_type);
 
         call.enqueue(new Callback<List<CatModel>>() {
             @Override

@@ -53,7 +53,7 @@ public interface PHPServiceAPI {
     @FormUrlEncoded
     @POST("api/select_Cat.php")
     Call<List<CatModel>> getcat_list(
-            @Field("HPT_id") String HPT_id,
+            @Field("HPT_name") String HPT_name,
             @Field("blood_type") String blood_type
     );
 

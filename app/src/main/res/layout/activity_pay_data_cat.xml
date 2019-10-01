@@ -58,13 +58,13 @@
         android:id="@+id/imageView2"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="8dp"
         android:contentDescription="@string/back_icon"
         app:layout_constraintBottom_toTopOf="@+id/viewStatus"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/main_header2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533"
         app:srcCompat="@drawable/leftarrow_121320" />
 
     <ImageView

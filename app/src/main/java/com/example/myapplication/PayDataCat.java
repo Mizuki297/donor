@@ -47,7 +47,7 @@ public class PayDataCat extends AppCompatActivity {
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
         final String getUserID = getIntent().getExtras().getString("user_id");
-        String getHPT_name = getIntent().getExtras().getString("HPT_name");
+        final String getHPT_name = getIntent().getExtras().getString("HPT_name");
         final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
         System.out.println(getUserID);
@@ -78,13 +78,14 @@ public class PayDataCat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                updateCoin(getUserID);
-                onNextSelect(getBlood_type);
+                onNextSelect(getBlood_type,getHPT_name);
             }
         });
     }
-    public void onNextSelect(String blood_type) {
+    public void onNextSelect(String blood_type,String HPT_name) {
         Intent intent = new Intent(this,cat_list.class);
         intent.putExtra("blood_type",blood_type);
+        intent.putExtra("HPT_name",HPT_name);
         startActivity(intent);
     }
     private void updateCoin(String user_id){
