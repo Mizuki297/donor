@@ -1,6 +1,7 @@
 package com.example.myapplication;
 //ส่วนการเรียกอุปกรณ์ต่างๆ
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
         search = (Button) findViewById(R.id.search_button);
 
-        button_add = (View) findViewById(R.id.main_menu1);
+        button_add = (View) findViewById(R.id.imageIcon_add);
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
