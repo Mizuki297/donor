@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(t.getMessage());
             }
         });
-        //แสดงกรณีบันทึกสำเร็จ
+//        แสดงกรณีบันทึกสำเร็จ
 Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
     }
 //เปลี่ยนหน้า
