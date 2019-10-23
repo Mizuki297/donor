@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerHospital;
 
-    private String userID;
+    private String money;
 
     private View button_add;
 
@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        final String getUserID = getIntent().getExtras().getString("user_id");
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         hospitalList.add("กรุณาเลือกสถานที่รักษา");
         //Get User
-        getUser();
+        getUser(getUserID);
         // Get Hospital list from api
         getHospitalList();
 
@@ -132,40 +134,42 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(selectHospital);
                     System.out.println(radioButton.getText().toString());
 //                    createPost(selectHospital,radioButton.getText().toString());
-                    onClick_button_search();
+                    onClick_button_search(getUserID);
                 }
             }
         });
+
+
     }//สร้างต่วส่งข้อมูลไป api
     //สร้างฟังก์ชัน สำหรับสร้าตัวบันทึกข้อมูล โดยรับค่า 2 ค่า
-    private void createPost(String HPT,String Blood) {
-        //เรียกใช้ service createPost
-        Call<Void> call = phpServiceAPI.createPost(HPT,Blood,1);
-        //รอการตอบกลับจาก API
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-                System.out.println(t.getMessage());
-            }
-        });
-//        แสดงกรณีบันทึกสำเร็จ
-Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
-    }
+//    private void createPost(String HPT,String Blood) {
+//        //เรียกใช้ service createPost
+//        Call<Void> call = phpServiceAPI.createPost(HPT,Blood,);
+//        //รอการตอบกลับจาก API
+//        call.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//
+//                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+//                System.out.println(t.getMessage());
+//            }
+//        });
+////        แสดงกรณีบันทึกสำเร็จ
+//Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
+//    }
 //เปลี่ยนหน้า
     public void onClick_button_add (){
         Intent intent = new Intent();
         startActivity(intent);
     }
-    public void onClick_button_search (){
+    public void onClick_button_search (String user_id){
         Intent intent = new Intent(this, PayDataCat.class);
-        intent.putExtra("user_id",userID);
+        intent.putExtra("user_id",user_id);
         intent.putExtra("HPT_name",selectHospital);
         intent.putExtra("blood_type",radioButton.getText().toString());
         startActivity(intent);
@@ -202,8 +206,8 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
             }
         });
     }
-    private void getUser() {
-        Call<List<User>> call = phpServiceAPI.getUser("1");
+    private void getUser(String user_id) {
+        Call<List<User>> call = phpServiceAPI.getUser(user_id);
 
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -222,7 +226,7 @@ Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).
                     content += "money_coin: " + post.getMoney_coin() + "\n";
 
                     System.out.println(content);
-                    userID = post.getUser_id();
+                    money = post.getMoney_coin();
                 }
             }
 

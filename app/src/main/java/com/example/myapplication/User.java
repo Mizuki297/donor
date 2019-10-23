@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 public class User {
-    private String user_id, user_name, user_s_name, user_tel, user_username, user_password, user_line_id, money_coin;
+    private String user_id, user_name, user_s_name, user_tel, user_username, user_password, user_line_id, money_coin, user;
 
     public String getUser_id() {
         return user_id;
@@ -33,5 +33,9 @@ public class User {
 
     public String getMoney_coin() {
         return money_coin;
+    }
+
+    public String getUser() {
+        return user;
     }
 }

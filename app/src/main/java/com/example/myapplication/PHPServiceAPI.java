@@ -1,18 +1,12 @@
 package com.example.myapplication;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 //เรียกการส่ง api
 public interface PHPServiceAPI {
@@ -61,5 +55,24 @@ public interface PHPServiceAPI {
     @POST("api/show_data_cat.php")
     Call<CatModel> getCatDetail(
             @Field("cat_id") String cat_id
+    );
+    @FormUrlEncoded
+    @POST("api/login.php")
+    Call<Check_login> login(
+            @Field("username")String username,
+            @Field("password")String password
+    );
+
+    @FormUrlEncoded
+    @POST("api/register.php")
+    Call<List<User>> numUser(
+            @Field("user_name")String user_name,
+            @Field("user_s_name")String user_s_name,
+            @Field("username")String username,
+            @Field("password")String password,
+            @Field("user_email")String user_email,
+            @Field("user_tel")String user_tel,
+            @Field("user_line_id")String user_line_id,
+            @Field("HPT_name")String HPT_name
     );
 }
