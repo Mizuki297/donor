@@ -37,7 +37,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="10dp"
-        android:background="#F0E8E8"
+        android:background="@drawable/shape_button"
         app:layout_constraintBottom_toTopOf="@+id/text_bloodtype"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

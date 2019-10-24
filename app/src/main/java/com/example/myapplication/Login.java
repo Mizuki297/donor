@@ -54,21 +54,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 System.out.println(username);
                 System.out.println(password);
 
-//                if (username.matches("") || password.matches("")){
-//                    Toast.makeText(getApplicationContext(),"pls enter data",Toast.LENGTH_SHORT).show();
-//                }else{
+                if (username.matches("") || password.matches("")){
+                    Toast.makeText(getApplicationContext(),"pls enter data",Toast.LENGTH_SHORT).show();
+                }else{
                     login(username, password);
-//                }
-//
-//                Intent intent = new Intent(this,MainActivity.class);
-//                intent.putExtra("user_id",user_id);
-//                startActivity(intent);
-//                if (user_id.length() >= 1){
-//                    Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
-//
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"login Nor ok",Toast.LENGTH_LONG).show();
-//                }
+                }
                 break;
 
             case R.id.tvRegisterLink:
@@ -83,25 +73,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 public void onResponse(Call<Check_login> call, Response<Check_login> response) {
                     Check_login getList = response.body();
                         user_id = getList.getUser_id();
-//                        String token = getList.getToken();
-//                        System.out.println(user_id);
 
-//                    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putString("user_id",user_id);
-//                    editor.commit();
-//
-//
-//                    SharedPreferences getUser = getPreferences(Context.MODE_PRIVATE);
-//                    String currentUser = getUser.getString("user_id","");
-//
-//                    System.out.println("currenUser->");
-//                    System.out.println(currentUser);
                     session = new Session(getApplicationContext());
                     session.setUserId(user_id);
 
-
                     System.out.println(session.getUserId());
+                    if (user_id != null){
+                        Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Login.this,MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"login Not ok",Toast.LENGTH_LONG).show();
+                    }
 
                 }
 

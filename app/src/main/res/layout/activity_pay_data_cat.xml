@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textview"
@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/View"
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_marginStart="8dp"
         android:contentDescription="@string/back_icon"
         app:layout_constraintBottom_toTopOf="@+id/viewStatus"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/View"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/main_header2"
         app:layout_constraintTop_toTopOf="parent"
@@ -85,7 +85,7 @@
         android:layout_marginStart="32dp"
         android:contentDescription="@string/coin"
         app:layout_constraintBottom_toTopOf="@+id/viewStatus"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/View"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.533"
         app:srcCompat="@drawable/money_4567" />

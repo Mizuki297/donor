@@ -38,19 +38,21 @@ public class PayDataCat extends AppCompatActivity {
 
     public Button pay_button;
 
+    private Session session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_data_cat);
 
+        session = new Session(getApplicationContext());
+        System.out.println("is register "+session.getUserId());
         // Call get hospital
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
-        final String getUserID = getIntent().getExtras().getString("user_id");
         final String getHPT_name = getIntent().getExtras().getString("HPT_name");
         final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
-        System.out.println(getUserID);
         System.out.println(getHPT_name);
         System.out.println(getBlood_type);
 
@@ -63,7 +65,7 @@ public class PayDataCat extends AppCompatActivity {
 
         numCat_select = (TextView) findViewById(R.id.textView8);
 
-        numCat(getUserID,getHPT_name,getBlood_type);
+        numCat(session.getUserId(),getHPT_name,getBlood_type);
 
         back_icon = (ImageView) findViewById(R.id.imageView2);
         back_icon.setOnClickListener(new View.OnClickListener() {

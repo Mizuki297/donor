@@ -59,16 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
     private View button_add;
 
+    private Session session;
+
     // ส่วนหลัก
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        session = new Session(getApplicationContext());
+        System.out.println("is register "+session.getUserId());
+
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-
-        final String getUserID = getIntent().getExtras().getString("user_id");
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         hospitalList.add("กรุณาเลือกสถานที่รักษา");
         //Get User
-        getUser(getUserID);
+        getUser(session.getUserId());
         // Get Hospital list from api
         getHospitalList();
 
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(selectHospital);
                     System.out.println(radioButton.getText().toString());
 //                    createPost(selectHospital,radioButton.getText().toString());
-                    onClick_button_search(getUserID);
+                    onClick_button_search();
                 }
             }
         });
@@ -167,9 +170,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         startActivity(intent);
     }
-    public void onClick_button_search (String user_id){
+    public void onClick_button_search (){
         Intent intent = new Intent(this, PayDataCat.class);
-        intent.putExtra("user_id",user_id);
         intent.putExtra("HPT_name",selectHospital);
         intent.putExtra("blood_type",radioButton.getText().toString());
         startActivity(intent);

@@ -42,13 +42,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-//        SharedPreferences getUser = getPreferences(Context.MODE_PRIVATE);
-//        String currentUser = getUser.getString("user_id","");
-//        System.out.println("currenUser->");
-//        System.out.println(currentUser);
-
         session = new Session(getApplicationContext());
-//        session.getUserId(user_id);
         System.out.println("is register "+session.getUserId());
 
         phpServiceAPI=RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
@@ -86,9 +80,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     }
                 }
         );
-
-
-
         bRegister.setOnClickListener(this);
     }
 
@@ -105,8 +96,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 user_email = etEmail.getText().toString();
                 user_tel = etTel.getText().toString();
                 user_line_id = etLineID.getText().toString();
-
-
 
                 if (user_name.matches("") || user_s_name.matches("")
                 || username.matches("") || password.matches("")
