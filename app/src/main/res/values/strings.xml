@@ -35,4 +35,51 @@
     <string name="tell_button">tell_button</string>
     <string name="cat_pic">Cat_pic</string>
     <string name="line_icon">line_icon</string>
+
+    <string name="pem">เพิ่มข้อมูล</string>
+    <string name="cat">ชื่อแมว</string>
+    <string name="group">กรุ๊ปเลือด</string>
+    <string name="ago">อายุ</string>
+    <string name="namnac">น้ำหนัก</string>
+    <string name="date">วันที่ตรวจสุขภาพล่าสุด yyyy-mm-dd</string>
+    <string name="blood">วันที่บริจาคเลือดล่าสุด yyyy-mm-dd</string>
+    <string name="wet">*แมวที่บริจาคเลือดได้ต้องมีอายู 2-3 ปีขึ้นไปและมีน้ำหนักมากกว่า 3 กิโลกรัมขึ้นไป</string>
+    <string name="ok">ยืนยัน</string>
+    <string name="_111">111</string>
+    <string name="image">TODO</string>
+    <string name="registered_cat">แมวที่ลงทะเบียนไว้</string>
+    <string name="plas">เพิ่ม</string>
+    <string name="add_up">เแก้ไข</string>
+    <string name="pesonal">ข้อมูลส่วนตัว</string>
+    <string name="search">ค้นหา</string>
+    <string name="black">กดกลับ</string>
+    <string name="ima">รูปภาพ</string>
+    <string name="edit">แก้ไขข้อมูล</string>
+    <string name="icon1">icon1</string>
+    <string name="icon2">TODO</string>
+    <string name="icon3">TODO</string>
+    <string name="manu">manu</string>
+    <string name="groubblood">กรุ๊ปเลือด</string>
+
+    <string-array name="groupblood">
+        <item>กรุ๊ปเลือด</item>
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+    </string-array>
+
+    <string name="text1">แก้ไขข้อมูล</string>
+    <string name="text2">แก้ไขรหัส</string>
+    <string name="logout">Logout</string>
+    <string name="user_name">User_name</string>
+    <string name="editdata">แก้ไขข้อมูล</string>
+    <string name="confirm">ยืนยัน</string>
+    <string name="name">ชื่อ</string>
+    <string name="lastname">นามสกุล</string>
+    <string name="tel">เบอรโทรศัพท์</string>
+    <string name="lineID">"@LineID</string>
+    <string name="editpassword">แก้ไขรหัส</string>
+    <string name="old_password">Old Password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

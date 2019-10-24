@@ -3,10 +3,17 @@
     <color name="colorPrimary">#FFE5AA</color>
     <color name="colorPrimaryDark">#FF6A60</color>
     <color name="colorAccent">#FF6A60</color>
+
     <color name="textcolor">#000000</color>
     <color name="textcolor2">#ffffff</color>
+
     <color name="buttoncolor">#FF6A60</color>
+
     <color name="colorGray">#E7E7E7</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colororange">#FFE5AA</color>
+
+    <color name="bgcolor">#FFe6aa</color>
+    <color name="red">#ff6a60</color>
+    <color name="white">#ffffff</color>
 </resources>

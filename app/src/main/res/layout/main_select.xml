@@ -127,7 +127,7 @@
 
     <ImageView
         android:id="@+id/imageIcon_add"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:contentDescription="@string/add_data_cat"
         app:layout_constraintBottom_toBottomOf="@+id/main_menu1"
@@ -168,7 +168,7 @@
 
     <ImageView
         android:id="@+id/imageIcon_user"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:contentDescription="@string/menu_user"
         app:layout_constraintBottom_toBottomOf="@+id/main_menu3"

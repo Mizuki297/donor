@@ -10,23 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 import java.util.List;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PayDataCat extends AppCompatActivity {
 
@@ -58,7 +46,7 @@ public class PayDataCat extends AppCompatActivity {
 
         getCoin();
 
-        user_coin = (TextView) findViewById(R.id.textView4);
+        user_coin = (TextView) findViewById(R.id.menu_coin);
 //        if (getCoin != 0 ){
 //        coin.setText(getCoin);
 //        }else{coin.setText(0);}

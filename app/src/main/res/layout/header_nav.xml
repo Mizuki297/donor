@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:background="#FFE5AA"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/menu_username"
+        android:layout_width="179dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="44dp"
+        android:text="ชื่อผู้ใช้งาน"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/menu_coin"
+        android:layout_width="94dp"
+        android:layout_height="32dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_username"
+        app:layout_constraintVertical_bias="0.29" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_coin"
+        app:layout_constraintEnd_toStartOf="@+id/menu_coin"
+        app:layout_constraintStart_toStartOf="@+id/menu_coin"
+        app:layout_constraintTop_toTopOf="@+id/menu_coin"
+        app:srcCompat="@drawable/coin" />
+</androidx.constraintlayout.widget.ConstraintLayout>

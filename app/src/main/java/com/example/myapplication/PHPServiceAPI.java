@@ -34,15 +34,15 @@ public interface PHPServiceAPI {
 
     );
 
-    @FormUrlEncoded
-    @POST("/api/get_post_request.php")
-    Call<Void> createPost(
-            @Field("HPT_name")String HPT_name,
-
-            @Field("Blood_type")String Blood_type,
-
-            @Field("user_id")int user_id
-    );
+//    @FormUrlEncoded
+//    @POST("/api/get_post_request.php")
+//    Call<Void> createPost(
+//            @Field("HPT_name")String HPT_name,
+//
+//            @Field("Blood_type")String Blood_type,
+//
+//            @Field("user_id")int user_id
+//    );
 
     @FormUrlEncoded
     @POST("api/select_Cat.php")
@@ -75,4 +75,60 @@ public interface PHPServiceAPI {
             @Field("user_line_id")String user_line_id,
             @Field("HPT_name")String HPT_name
     );
+    @FormUrlEncoded
+    @POST("/api/add_cat2.php")
+    Call<Void> AddCat(
+
+            @Field("cat_name") String cat_name,
+            @Field("cat_type") String cat_type,
+            @Field("blood_type") String blood_type,
+            @Field("cat_bd") String cat_bd,
+            @Field("cat_weight") String cat_weight,
+            @Field("health_check_date") String health_check_date,
+            @Field("latest_donation") String latest_donation,
+//            @Field("HPT_id") String HTP_id,
+            @Field("user_id") String user_id,
+            @Field("file") String Url_image
+
+    );
+    @FormUrlEncoded
+    @POST("api/show_CatRegister.php")
+    Call<List<CatModel>> getCatRegister(
+            @Field("user_id")String user_id
+    );
+    @FormUrlEncoded
+    @POST("/api/update_cat.php")
+    Call<Void> UpdateCat(
+            @Field("cat-id")String cat_id,
+            @Field("cat_name") String cat_name,
+            @Field("cat_type") String cat_type,
+            @Field("blood_type") String blood_type,
+            @Field("cat_bd") String cat_bd,
+            @Field("cat_weight") String cat_weight,
+            @Field("health_check_date") String health_check_date,
+            @Field("latest_donation") String latest_donation
+    );
+    @FormUrlEncoded
+    @POST("/api/update_status.php")
+    Call<Void>Update_Status(
+            @Field("cai_id") String cat_id,
+            @Field("status_cat")String status_cat
+    );
+    @FormUrlEncoded
+    @POST("api/update_user.php")
+    Call<Void> update_user(
+            @Field("user_id")String user_id,
+            @Field("user_name")String user_name,
+            @Field("user_s_name")String user_s_name,
+            @Field("user_tel")String user_tal,
+            @Field("user_line_id")String user_line_id
+    );
+    @FormUrlEncoded
+    @POST("api/update_pass.php")
+    Call<Void> update_pass(
+            @Field("user_id")String user_id,
+            @Field("old_pass")String old_pass,
+            @Field("password")String password
+    );
+
 }

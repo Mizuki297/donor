@@ -35,15 +35,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private String user_tel;
     private String user_line_id;
     private String HPT_name;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        session = new Session(getApplicationContext());
-        System.out.println("is register "+session.getUserId());
 
         phpServiceAPI=RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
         etName = (EditText) findViewById(R.id.etName);

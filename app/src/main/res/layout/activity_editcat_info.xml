@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Editcat_info">
+
+    <View
+        android:id="@+id/head"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/bgcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/headpam"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:hint="@string/pem"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/head"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <EditText
+        android:id="@+id/name_cat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="6dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/cat"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/name_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <EditText
+        android:id="@+id/name_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="6dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/cat_type"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@id/ago1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_cat" />
+
+    <EditText
+        android:id="@+id/groupblood"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="6dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/groubblood"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_type" />
+
+    <EditText
+        android:id="@+id/ago1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/ago"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintEnd_toStartOf="@+id/nam1"
+        app:layout_constraintStart_toEndOf="@+id/groupblood"
+        app:layout_constraintTop_toBottomOf="@+id/name_type" />
+
+    <EditText
+        android:id="@+id/nam1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/namnac"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_type" />
+
+    <EditText
+        android:id="@+id/date1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="6dp"
+        android:ems="10"
+        android:hint="@string/date"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/blooddaet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ago1" />
+
+    <EditText
+        android:id="@+id/blooddaet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="2dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/blood"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/wet"
+        android:textColor="#F71919"
+        android:textColorHint="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blooddaet" />
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@color/red"
+        android:text="@string/edit"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="110dp"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toTopOf="@+id/name_cat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/head"
+        app:srcCompat="@drawable/gallery_121253" />
+
+    <ImageView
+        android:id="@+id/imageblack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/black"
+        app:layout_constraintBottom_toBottomOf="@+id/head"
+        app:layout_constraintEnd_toStartOf="@+id/headpam"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/head"
+        app:srcCompat="@drawable/leftarrow_121320" />
+
+    <ImageView
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/manu"
+        android:cropToPadding="true"
+        app:layout_constraintBottom_toBottomOf="@+id/head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/headpam"
+        app:layout_constraintTop_toTopOf="@+id/head"
+        app:layout_constraintVertical_bias="0.833"
+        app:srcCompat="@drawable/menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

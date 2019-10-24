@@ -1,12 +1,16 @@
 package com.example.myapplication;
 //ส่วนการเรียกอุปกรณ์ต่างๆ
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -15,8 +19,10 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,6 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //ส่วนคลาสหลัก
 public class MainActivity extends AppCompatActivity {
 
+    private AppBarConfiguration appBarConfiguration;
     //ประกาศค่าต่างๆที่ต้องการใช้
     private ArrayList<String> hospitalList = new ArrayList<>();
 
@@ -55,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerHospital;
 
-    private String money;
+    private View button_add,button_user;
 
-    private View button_add;
+    private TextView name,coin;
 
     private Session session;
 
@@ -68,10 +75,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         session = new Session(getApplicationContext());
-        System.out.println("is register "+session.getUserId());
+        System.out.println(session.getUserId());
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -79,9 +88,48 @@ public class MainActivity extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                onClick_button_add();
+                Intent intent = new Intent(MainActivity.this,User_Cat_list.class);
+                startActivity(intent);
             }
         });
+
+        button_user = findViewById(R.id.imageIcon_user);
+        button_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.END);
+            }
+        });
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.menu_update_user
+                ,R.id.menu_update_pass
+                ,R.id.menu_logout
+        ).setDrawerLayout(drawerLayout).build();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.menu_update_user:
+                        Toast.makeText(getApplicationContext(),"update user",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, Update_userData.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.menu_update_pass:
+                        Toast.makeText(getApplicationContext(),"update pass",Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainActivity.this, Re_pass.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.menu_logout:
+                        Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+        name = findViewById(R.id.menu_username);
+        coin = findViewById(R.id.menu_coin);
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
@@ -166,10 +214,6 @@ public class MainActivity extends AppCompatActivity {
 //Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
 //    }
 //เปลี่ยนหน้า
-    public void onClick_button_add (){
-        Intent intent = new Intent();
-        startActivity(intent);
-    }
     public void onClick_button_search (){
         Intent intent = new Intent(this, PayDataCat.class);
         intent.putExtra("HPT_name",selectHospital);
@@ -228,7 +272,9 @@ public class MainActivity extends AppCompatActivity {
                     content += "money_coin: " + post.getMoney_coin() + "\n";
 
                     System.out.println(content);
-                    money = post.getMoney_coin();
+
+                    name.setText(post.getUser_name());
+                    coin.setText(post.getMoney_coin());
                 }
             }
 

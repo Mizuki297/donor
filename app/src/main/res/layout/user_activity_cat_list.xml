@@ -5,11 +5,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".User_Cat_list">
 
-    <include
-        android:id="@+id/main_select"
-        layout="@layout/main_select" />
+    <include layout="@layout/user_cat_list_layout" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

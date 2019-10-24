@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/icon1"
+        android:src="@drawable/edit_121277"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/icon2"
+        android:src="@drawable/heart_121311"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.61" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/icon3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/menu_username"
+        android:layout_width="77dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/cat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/heart1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FDFCFC"
+        app:layout_constraintBottom_toBottomOf="@+id/heart"
+        app:layout_constraintEnd_toEndOf="@+id/heart"
+        app:layout_constraintStart_toStartOf="@+id/heart"
+        app:layout_constraintTop_toTopOf="@+id/heart" />
+
+    <Button
+        android:id="@+id/edit1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FDFCFC"
+        app:layout_constraintBottom_toBottomOf="@+id/edit"
+        app:layout_constraintEnd_toEndOf="@+id/edit"
+        app:layout_constraintStart_toStartOf="@+id/edit"
+        app:layout_constraintTop_toTopOf="@+id/edit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
