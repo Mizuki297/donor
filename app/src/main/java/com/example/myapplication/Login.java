@@ -5,7 +5,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button bLogin;
     private EditText etUsername, etPassword;
     private String username, password, user_id;
+    private Session session;
 
 
     @Override
@@ -50,17 +53,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 password = etPassword.getText().toString();
                 System.out.println(username);
                 System.out.println(password);
-//                login(username, password);
 
-                if (user_id != null){
-                    Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
-
-                    Intent intent = new Intent(this,MainActivity.class);
-                    intent.putExtra("user_id",user_id);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"login Nor ok",Toast.LENGTH_LONG).show();
-                }
+//                if (username.matches("") || password.matches("")){
+//                    Toast.makeText(getApplicationContext(),"pls enter data",Toast.LENGTH_SHORT).show();
+//                }else{
+                    login(username, password);
+//                }
+//
+//                Intent intent = new Intent(this,MainActivity.class);
+//                intent.putExtra("user_id",user_id);
+//                startActivity(intent);
+//                if (user_id.length() >= 1){
+//                    Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
+//
+//                }else{
+//                    Toast.makeText(getApplicationContext(),"login Nor ok",Toast.LENGTH_LONG).show();
+//                }
                 break;
 
             case R.id.tvRegisterLink:
@@ -75,8 +83,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 public void onResponse(Call<Check_login> call, Response<Check_login> response) {
                     Check_login getList = response.body();
                         user_id = getList.getUser_id();
-                        System.out.println(user_id);
-                        return;
+//                        String token = getList.getToken();
+//                        System.out.println(user_id);
+
+//                    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("user_id",user_id);
+//                    editor.commit();
+//
+//
+//                    SharedPreferences getUser = getPreferences(Context.MODE_PRIVATE);
+//                    String currentUser = getUser.getString("user_id","");
+//
+//                    System.out.println("currenUser->");
+//                    System.out.println(currentUser);
+                    session = new Session(getApplicationContext());
+                    session.setUserId(user_id);
+
+
+                    System.out.println(session.getUserId());
+
                 }
 
                 @Override

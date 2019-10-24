@@ -5,6 +5,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,12 +35,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private String user_tel;
     private String user_line_id;
     private String HPT_name;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+//        SharedPreferences getUser = getPreferences(Context.MODE_PRIVATE);
+//        String currentUser = getUser.getString("user_id","");
+//        System.out.println("currenUser->");
+//        System.out.println(currentUser);
+
+        session = new Session(getApplicationContext());
+//        session.getUserId(user_id);
+        System.out.println("is register "+session.getUserId());
 
         phpServiceAPI=RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
         etName = (EditText) findViewById(R.id.etName);
