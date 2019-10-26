@@ -111,7 +111,7 @@ public interface PHPServiceAPI {
     @FormUrlEncoded
     @POST("/api/update_status.php")
     Call<Void>Update_Status(
-            @Field("cai_id") String cat_id,
+            @Field("cat_id") String cat_id,
             @Field("status_cat")String status_cat
     );
     @FormUrlEncoded
