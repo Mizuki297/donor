@@ -34,7 +34,7 @@ public class PayDataCat extends AppCompatActivity {
         setContentView(R.layout.activity_pay_data_cat);
 
         session = new Session(getApplicationContext());
-        System.out.println("is register "+session.getUserId());
+        System.out.println(session.getUserId());
         // Call get hospital
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
@@ -47,9 +47,6 @@ public class PayDataCat extends AppCompatActivity {
         getCoin();
 
         user_coin = (TextView) findViewById(R.id.menu_coin);
-//        if (getCoin != 0 ){
-//        coin.setText(getCoin);
-//        }else{coin.setText(0);}
 
         numCat_select = (TextView) findViewById(R.id.textView8);
 
@@ -67,8 +64,13 @@ public class PayDataCat extends AppCompatActivity {
         pay_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                updateCoin(getUserID);
-                onNextSelect(getBlood_type,getHPT_name);
+
+                if (user_coin.getText().toString().length() <= 1){
+                    Toast.makeText(getApplicationContext(),"ยอดเงินไม่เพียงพอ",Toast.LENGTH_SHORT).show();
+                }else{
+                    updateCoin(session.getUserId());
+                    onNextSelect(getBlood_type,getHPT_name);
+                }
             }
         });
     }
@@ -125,7 +127,7 @@ public class PayDataCat extends AppCompatActivity {
         });
     }
     private void getCoin() {
-        Call<List<User>> call = phpServiceAPI.getUser("1");
+        Call<List<User>> call = phpServiceAPI.getUser(session.getUserId());
 
         call.enqueue(new Callback<List<User>>() {
             @Override

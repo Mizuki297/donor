@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        name = findViewById(R.id.menu_username);
-        coin = findViewById(R.id.menu_coin);
+        name = (TextView) findViewById(R.id.menu_username);
+        coin = (TextView) findViewById(R.id.menu_coin);
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
@@ -273,8 +273,8 @@ public class MainActivity extends AppCompatActivity {
 
                     System.out.println(content);
 
-                    name.setText(post.getUser_name());
-                    coin.setText(post.getMoney_coin());
+//                    name.setText(post.getUser_name().toString());
+//                    coin.setText(post.getMoney_coin());
                 }
             }
 

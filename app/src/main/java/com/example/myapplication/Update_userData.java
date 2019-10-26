@@ -26,6 +26,8 @@ public class Update_userData extends AppCompatActivity {
 
     private String user_name,user_s_name,user_tal,user_line_id,user_password;
 
+    private Session session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class Update_userData extends AppCompatActivity {
         setContentView(R.layout.update_user_layout);
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
+
+        session = new Session(getApplicationContext());
+        System.out.println(session.getUserId());
 
         name = (EditText) findViewById(R.id.name);
         lastname = (EditText) findViewById(R.id.lastname);
@@ -42,7 +47,7 @@ public class Update_userData extends AppCompatActivity {
         back = (ImageView)findViewById(R.id.back);
 
 
-        getUser("1");
+        getUser(session.getUserId());
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +64,7 @@ public class Update_userData extends AppCompatActivity {
                 String user_t = tel.getText().toString();
                 String user_l = lineid.getText().toString();
 
-                update_user("1",user_name,user_s,user_t,user_l);
+                update_user(session.getUserId(),user_name,user_s,user_t,user_l);
 
             }
         });

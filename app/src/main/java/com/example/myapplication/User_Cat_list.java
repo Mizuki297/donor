@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -56,6 +57,22 @@ public class User_Cat_list extends AppCompatActivity {
        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
        NavigationView navigationView = findViewById(R.id.nav_view);
 
+       phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
+
+       name = (TextView) findViewById(R.id.menu_username);
+       coin = (TextView) findViewById(R.id.menu_coin);
+
+       back = (ImageView) findViewById(R.id.black);
+       plus = (ImageView) findViewById(R.id.plus);
+
+       edit_data = (ImageView) findViewById(R.id.edit_data);
+       search = (ImageView) findViewById(R.id.search);
+       personal = (ImageView) findViewById(R.id.personal);
+
+       listview = (ListView) findViewById(R.id.listview);
+
+       getUser(session.getUserId());
+
        appBarConfiguration = new AppBarConfiguration.Builder(
                R.id.menu_update_user
                ,R.id.menu_update_pass
@@ -84,21 +101,6 @@ public class User_Cat_list extends AppCompatActivity {
                return true;
            }
        });
-       name = findViewById(R.id.menu_username);
-       coin = findViewById(R.id.menu_coin);
-
-       getUser(session.getUserId());
-
-       back = (ImageView) findViewById(R.id.black);
-       plus = (ImageView) findViewById(R.id.plus);
-
-       edit_data = (ImageView) findViewById(R.id.edit_data);
-       search = (ImageView) findViewById(R.id.search);
-       personal = (ImageView) findViewById(R.id.personal);
-
-       listview = (ListView) findViewById(R.id.listview);
-
-       phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
        Call<List<CatModel>> call = phpServiceAPI.getCatRegister(session.getUserId());
 
@@ -149,7 +151,7 @@ public class User_Cat_list extends AppCompatActivity {
         personal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                drawerLayout.openDrawer(GravityCompat.END);
             }
         });
 
@@ -175,8 +177,8 @@ public class User_Cat_list extends AppCompatActivity {
 
                     System.out.println(content);
 
-                    name.setText(post.getUser_name());
-                    coin.setText(post.getMoney_coin());
+//                    name.setText(post.getUser_name());
+//                    coin.setText(post.getMoney_coin());
                 }
             }
 
