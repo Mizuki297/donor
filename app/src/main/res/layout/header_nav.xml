@@ -12,34 +12,37 @@
         android:id="@+id/menu_username"
         android:layout_width="179dp"
         android:layout_height="52dp"
-        android:layout_marginTop="44dp"
-        android:text="ชื่อผู้ใช้งาน"
+        android:layout_marginStart="32dp"
+        android:text="@string/User_name"
+        android:textColor="#000000"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
     <TextView
         android:id="@+id/menu_coin"
         android:layout_width="94dp"
         android:layout_height="32dp"
+        android:layout_marginStart="16dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.277"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_username"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/menu_username" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="37dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintBottom_toBottomOf="@+id/menu_coin"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/coin_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/menu_coin"
-        app:layout_constraintStart_toStartOf="@+id/menu_coin"
-        app:layout_constraintTop_toTopOf="@+id/menu_coin"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_username"
         app:srcCompat="@drawable/coin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

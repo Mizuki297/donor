@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.models.NumCatModel;
+import com.example.myapplication.models.UserModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -75,7 +78,7 @@ public class PayDataCat extends AppCompatActivity {
         });
     }
     public void onNextSelect(String blood_type,String HPT_name) {
-        Intent intent = new Intent(this,cat_list.class);
+        Intent intent = new Intent(this, CatGridAdapter.class);
         intent.putExtra("blood_type",blood_type);
         intent.putExtra("HPT_name",HPT_name);
         startActivity(intent);
@@ -99,18 +102,18 @@ public class PayDataCat extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"ชำระเงินสำเร็จ",Toast.LENGTH_SHORT).show();
     }
     private void numCat(String getUserID,String getHPT_name,String getBlood_type) {
-        Call<List<NumCat>> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
+        Call<List<NumCatModel>> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
         //รอการตอบกลับจาก API
-        call.enqueue(new Callback<List<NumCat>>() {
+        call.enqueue(new Callback<List<NumCatModel>>() {
             @Override
-            public void onResponse(Call<List<NumCat>> call, Response<List<NumCat>> response) {
+            public void onResponse(Call<List<NumCatModel>> call, Response<List<NumCatModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
-                List<NumCat> getList = response.body();
+                List<NumCatModel> getList = response.body();
 
-                for (NumCat post : getList) {
+                for (NumCatModel post : getList) {
                     String content = "";
                     content += "numCat: " + post.getNumCat() + "\n";
 
@@ -119,7 +122,7 @@ public class PayDataCat extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<List<NumCat>> call, Throwable t) {
+            public void onFailure(Call<List<NumCatModel>> call, Throwable t) {
 
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
@@ -127,19 +130,19 @@ public class PayDataCat extends AppCompatActivity {
         });
     }
     private void getCoin() {
-        Call<List<User>> call = phpServiceAPI.getUser(session.getUserId());
+        Call<List<UserModel>> call = phpServiceAPI.getUser(session.getUserId());
 
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                List<User> getList = response.body();
+                List<UserModel> getList = response.body();
 
-                for (User post: getList) {
+                for (UserModel post: getList) {
                     String content = "";
                     content += "money_coin: " + post.getMoney_coin() + "\n";
 
@@ -148,7 +151,7 @@ public class PayDataCat extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

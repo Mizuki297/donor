@@ -16,4 +16,7 @@ public class Session {
         String user_id = presf.getString("user_id","");
         return user_id;
     }
+    public void clearUserId(){
+        presf.edit().clear().commit();
+    }
 }

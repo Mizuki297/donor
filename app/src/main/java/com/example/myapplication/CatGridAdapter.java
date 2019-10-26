@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.models.CatModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class cat_list extends AppCompatActivity {
+public class CatGridAdapter extends AppCompatActivity {
 
     public static  final  String EXTRA_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
 
@@ -50,7 +51,7 @@ public class cat_list extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<CatModel>> call, Throwable t) {
-                Toast.makeText(cat_list.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(CatGridAdapter.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

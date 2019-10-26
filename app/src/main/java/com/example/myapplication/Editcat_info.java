@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.models.CatModel;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;

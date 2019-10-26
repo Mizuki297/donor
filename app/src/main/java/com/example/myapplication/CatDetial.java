@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.models.CatModel;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -41,7 +42,7 @@ public class CatDetial extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String cat_id = intent.getStringExtra(cat_list.EXTRA_CAT_ID);
+        String cat_id = intent.getStringExtra(CatGridAdapter.EXTRA_CAT_ID);
 
         cat_name = (TextView) findViewById(R.id.cat_name);
         cat_type = (TextView) findViewById(R.id.cat_type);
@@ -122,7 +123,7 @@ public class CatDetial extends AppCompatActivity {
 
     }
 
-    // กลับไปยังหน้า cat_list
+    // กลับไปยังหน้า CatGridAdapter
     private void setBackwordPage() {
         onBackPressed();
     }

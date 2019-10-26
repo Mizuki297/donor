@@ -20,17 +20,17 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".User_Cat_list"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".Login"
             android:screenOrientation="portrait"/>
         <activity android:name=".Register"
             android:screenOrientation="portrait"/>
-        <activity android:name=".cat_list"
+        <activity android:name=".CatGridAdapter"
             android:screenOrientation="portrait"/>
         <activity android:name=".CatDetial"
             android:screenOrientation="portrait"/>
         <activity android:name=".PayDataCat"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Login"
+        <activity android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

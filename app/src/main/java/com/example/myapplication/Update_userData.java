@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.models.UserModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -72,14 +74,14 @@ public class Update_userData extends AppCompatActivity {
 
     }
     private void  getUser(String user_id){
-        Call<List<User>> cal1 = phpServiceAPI.getUser(user_id);
+        Call<List<UserModel>> cal1 = phpServiceAPI.getUser(user_id);
 
-        cal1.enqueue(new Callback<List<User>>() {
+        cal1.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                List<User> getlist = response.body();
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+                List<UserModel> getlist = response.body();
 
-                for (User post:getlist){
+                for (UserModel post:getlist){
                     user_name = post.getUser_name();
                     user_s_name = post.getUser_s_name();
                     user_tal = post.getUser_tel();
@@ -102,7 +104,7 @@ public class Update_userData extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
 
             }
 

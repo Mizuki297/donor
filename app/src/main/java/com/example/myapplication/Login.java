@@ -5,9 +5,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +14,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.models.LoginModel;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private PHPServiceAPI phpServiceAPI;
     private Button bLogin;
     private EditText etUsername, etPassword;
-    private String username, password, user_id;
+    private String username, password;
     private Session session;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -30,10 +32,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         TextView tvRegisterLink;
 
+        session = new Session(getApplicationContext());
 
         // Call get hospital
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Progress");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         etUsername = (EditText) findViewById(R.id.Telephone);
         etPassword = (EditText) findViewById(R.id.Hospital);
@@ -57,6 +64,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (username.matches("") || password.matches("")){
                     Toast.makeText(getApplicationContext(),"pls enter data",Toast.LENGTH_SHORT).show();
                 }else{
+                    progressDialog.show();
+                    progressDialog.setCancelable(false);
                     login(username, password);
                 }
                 break;
@@ -67,29 +76,45 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
         private void login(String username, String password){
-            Call <Check_login> call = phpServiceAPI.login(username, password);
-            call.enqueue(new Callback<Check_login>() {
+            Call <LoginModel> call = phpServiceAPI.login(username, password);
+            call.enqueue(new Callback<LoginModel>() {
                 @Override
-                public void onResponse(Call<Check_login> call, Response<Check_login> response) {
-                    Check_login getList = response.body();
-                        user_id = getList.getUser_id();
-
-                    session = new Session(getApplicationContext());
-                    session.setUserId(user_id);
-
-                    System.out.println(session.getUserId());
-                    if (user_id != null){
-                        Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
+                public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+//                    LoginModel getList = response.body();
+//                        user_id = getList.getUser_id();
+//
+//                    session = new Session(getApplicationContext());
+//                    session.setUserId(user_id);
+//
+//                    System.out.println(session.getUserId());
+//                    if (user_id != null){
+//                        if (user_id.equals("0")){
+//                            Toast.makeText(getApplicationContext(),"login Not ok",Toast.LENGTH_LONG).show();
+//                            progressDialog.dismiss();
+//                        }else{
+//                            Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
+//                            Intent intent = new Intent(Login.this,MainActivity.class);
+//                            progressDialog.dismiss();
+//                            startActivity(intent);
+//                        }
+//                    }
+                    LoginModel userInfo = response.body();
+                    if (userInfo.status == 0){
+                        session.setUserId(userInfo.user_id);
+                        System.out.println(userInfo.description);
                         Intent intent = new Intent(Login.this,MainActivity.class);
+                        progressDialog.dismiss();
                         startActivity(intent);
                     }else{
-                        Toast.makeText(getApplicationContext(),"login Not ok",Toast.LENGTH_LONG).show();
+                        session.clearUserId();
+                        System.out.println(userInfo.description);
+                        Toast.makeText(getApplicationContext(),userInfo.description,Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     }
-
                 }
 
                 @Override
-                public void onFailure(Call<Check_login> call, Throwable t) {
+                public void onFailure(Call<LoginModel> call, Throwable t) {
                     Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                     System.out.println(t.getMessage());
 

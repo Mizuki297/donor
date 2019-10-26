@@ -22,6 +22,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.myapplication.models.CatModel;
+import com.example.myapplication.models.UserModel;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +42,7 @@ public class User_Cat_list extends AppCompatActivity {
 
     private TextView name,coin;
 
-    public static final String USER_CAT_ID = "com.example.donormyapplication.EXTRA_TEXT";
+    public static final String USER_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
 
 //    String user_id = "1";
     ListView listView;
@@ -56,11 +58,11 @@ public class User_Cat_list extends AppCompatActivity {
 
        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
        NavigationView navigationView = findViewById(R.id.nav_view);
+       View henderView = navigationView.getHeaderView(0);
+       name = (TextView) henderView.findViewById(R.id.menu_username);
+       coin = (TextView) henderView.findViewById(R.id.menu_coin);
 
        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
-
-       name = (TextView) findViewById(R.id.menu_username);
-       coin = (TextView) findViewById(R.id.menu_coin);
 
        back = (ImageView) findViewById(R.id.black);
        plus = (ImageView) findViewById(R.id.plus);
@@ -95,6 +97,8 @@ public class User_Cat_list extends AppCompatActivity {
                        break;
                    case R.id.menu_logout:
                        Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
+                       Intent intent3 = new Intent(User_Cat_list.this,Login.class);
+                       startActivity(intent3);
                        break;
                }
                drawerLayout.closeDrawers();
@@ -120,14 +124,10 @@ public class User_Cat_list extends AppCompatActivity {
            back.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               onBackPressed();
+               Intent intent = new Intent(User_Cat_list.this,MainActivity.class);
+               startActivity(intent);
            }
        });
-
-
-
-
-
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,19 +157,19 @@ public class User_Cat_list extends AppCompatActivity {
 
     }
     private void getUser(String user_id) {
-        Call<List<User>> call = phpServiceAPI.getUser(user_id);
+        Call<List<UserModel>> call = phpServiceAPI.getUser(user_id);
 
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                List<User> getList = response.body();
+                List<UserModel> getList = response.body();
 
-                for (User post: getList) {
+                for (UserModel post: getList) {
                     String content = "";
                     content += "user_id: " + post.getUser_id() + "\n";
                     content += "user_name: " + post.getUser_name() + "\n";
@@ -177,13 +177,13 @@ public class User_Cat_list extends AppCompatActivity {
 
                     System.out.println(content);
 
-//                    name.setText(post.getUser_name());
-//                    coin.setText(post.getMoney_coin());
+                    name.setText(post.getUser_name());
+                    coin.setText(post.getMoney_coin());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

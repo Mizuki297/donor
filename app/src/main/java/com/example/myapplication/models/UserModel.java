@@ -1,7 +1,16 @@
-package com.example.myapplication;
+package com.example.myapplication.models;
 
-public class User {
-    private String user_id, user_name, user_s_name, user_tel, user_username, user_password, user_line_id, money_coin, user;
+public class UserModel {
+
+    private String user_id,
+            user_name,
+            user_s_name,
+            user_tel,
+            user_username,
+            user_password,
+            user_line_id,
+            money_coin,
+            user = null;
 
     public String getUser_id() {
         return user_id;

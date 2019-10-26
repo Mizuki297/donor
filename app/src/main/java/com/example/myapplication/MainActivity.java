@@ -9,7 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -22,26 +21,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.models.HospitalModel;
+import com.example.myapplication.models.UserModel;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import okhttp3.Request;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 //ส่วนคลาสหลัก
 public class MainActivity extends AppCompatActivity {
@@ -65,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private View button_add,button_user;
 
     private TextView name,coin;
+    private String user_name,user_coin = "";
 
     private Session session;
 
@@ -77,10 +67,18 @@ public class MainActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         System.out.println(session.getUserId());
 
+        if (session.getUserId() == "" || session.getUserId() == null){
+            Intent intent = new Intent(MainActivity.this,Login.class);
+            startActivity(intent);
+        }
+
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View henderView = navigationView.getHeaderView(0);
+        name = (TextView) henderView.findViewById(R.id.menu_username);
+        coin = (TextView) henderView.findViewById(R.id.menu_coin);
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -100,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
+
+        getUser(session.getUserId());
+
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.menu_update_user
                 ,R.id.menu_update_pass
@@ -122,21 +123,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_logout:
                         Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
+                        session.clearUserId();
+                        Intent intent3 = new Intent(MainActivity.this,Login.class);
+                        startActivity(intent3);
                         break;
                 }
                 drawerLayout.closeDrawers();
                 return true;
             }
         });
-        name = (TextView) findViewById(R.id.menu_username);
-        coin = (TextView) findViewById(R.id.menu_coin);
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
         hospitalList.add("กรุณาเลือกสถานที่รักษา");
-        //Get User
-        getUser(session.getUserId());
-        // Get Hospital list from api
+        // Get HospitalModel list from api
         getHospitalList();
 
         //dropdown
@@ -222,19 +222,19 @@ public class MainActivity extends AppCompatActivity {
     }
 //ดึงข้อมูลจาก api
     private void getHospitalList() {
-        Call<List<Hospital>> call = phpServiceAPI.getHospital();
+        Call<List<HospitalModel>> call = phpServiceAPI.getHospital();
 
-        call.enqueue(new Callback<List<Hospital>>() {
+        call.enqueue(new Callback<List<HospitalModel>>() {
             @Override
-            public void onResponse(Call<List<Hospital>> call, Response<List<Hospital>> response) {
+            public void onResponse(Call<List<HospitalModel>> call, Response<List<HospitalModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                List<Hospital> getList = response.body();
+                List<HospitalModel> getList = response.body();
 
-                for (Hospital post: getList) {
+                for (HospitalModel post: getList) {
                     String content = "";
                     content += "HPT_id: " + post.getHPT_id() + "\n";
                     content += "HPT_name: " + post.getHPT_name() + "\n";
@@ -247,25 +247,25 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Hospital>> call, Throwable t) {
+            public void onFailure(Call<List<HospitalModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
     }
     private void getUser(String user_id) {
-        Call<List<User>> call = phpServiceAPI.getUser(user_id);
+        Call<List<UserModel>> call = phpServiceAPI.getUser(user_id);
 
-        call.enqueue(new Callback<List<User>>() {
+        call.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                List<User> getList = response.body();
+                List<UserModel> getList = response.body();
 
-                for (User post: getList) {
+                for (UserModel post: getList) {
                     String content = "";
                     content += "user_id: " + post.getUser_id() + "\n";
                     content += "user_name: " + post.getUser_name() + "\n";
@@ -273,13 +273,16 @@ public class MainActivity extends AppCompatActivity {
 
                     System.out.println(content);
 
-//                    name.setText(post.getUser_name().toString());
-//                    coin.setText(post.getMoney_coin());
+                    user_name = post.getUser_name();
+                    user_coin = post.getMoney_coin();
+
                 }
+                name.setText(user_name);
+                coin.setText(user_coin);
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

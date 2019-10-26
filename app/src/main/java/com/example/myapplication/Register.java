@@ -5,8 +5,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.myapplication.models.HospitalModel;
+import com.example.myapplication.models.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,19 +116,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     }
     private void getHospitalList() {
-        Call<List<Hospital>> call = phpServiceAPI.getHospital();
+        Call<List<HospitalModel>> call = phpServiceAPI.getHospital();
 
-        call.enqueue(new Callback<List<Hospital>>() {
+        call.enqueue(new Callback<List<HospitalModel>>() {
             @Override
-            public void onResponse(Call<List<Hospital>> call, Response<List<Hospital>> response) {
+            public void onResponse(Call<List<HospitalModel>> call, Response<List<HospitalModel>> response) {
                 if (!response.isSuccessful()) {
                     // textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
-                List<Hospital> getList = response.body();
+                List<HospitalModel> getList = response.body();
 
-                for (Hospital post: getList) {
+                for (HospitalModel post: getList) {
                     String content = "";
                     content += "HPT_id: " + post.getHPT_id() + "\n";
                     content += "HPT_name: " + post.getHPT_name() + "\n";
@@ -140,19 +141,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onFailure(Call<List<Hospital>> call, Throwable t) {
+            public void onFailure(Call<List<HospitalModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
     }
     private void Register(){
-        Call<List<User>> call=phpServiceAPI.numUser(user_name, user_s_name, username, password, user_email, user_tel, user_line_id,HPT_name);
-        call.enqueue(new Callback<List<User>>() {
+        Call<List<UserModel>> call=phpServiceAPI.numUser(user_name, user_s_name, username, password, user_email, user_tel, user_line_id,HPT_name);
+        call.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                List<User> getlist = response.body();
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+                List<UserModel> getlist = response.body();
 
-                for (User post:getlist){
+                for (UserModel post:getlist){
                     String user_re = post.getUser();
                     System.out.println(user_re);
                 }
@@ -161,10 +162,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
 
             }
         });
+        onBackPressed();
     }
 
 }

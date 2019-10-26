@@ -1,5 +1,11 @@
 package com.example.myapplication;
 
+import com.example.myapplication.models.CatModel;
+import com.example.myapplication.models.HospitalModel;
+import com.example.myapplication.models.LoginModel;
+import com.example.myapplication.models.NumCatModel;
+import com.example.myapplication.models.UserModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -12,11 +18,11 @@ import retrofit2.http.POST;
 public interface PHPServiceAPI {
 
     @GET("/api/get_post_hpt.php")
-    Call<List<Hospital>> getHospital();
+    Call<List<HospitalModel>> getHospital();
 
     @FormUrlEncoded
     @POST("/api/get_post_user.php")
-    Call<List<User>> getUser(
+    Call<List<UserModel>> getUser(
             @Field("user_id") String user_id
     );
     @FormUrlEncoded
@@ -27,7 +33,7 @@ public interface PHPServiceAPI {
     //บัคการส่งข้อมูล
     @FormUrlEncoded
     @POST("/api/select_data.php")
-    Call<List<NumCat>> numCat(
+    Call<List<NumCatModel>> numCat(
             @Field("user_id") String user_id,
             @Field("HPT_name") String HPT_name,
             @Field("Blood_type") String Blood_type
@@ -58,14 +64,14 @@ public interface PHPServiceAPI {
     );
     @FormUrlEncoded
     @POST("api/login.php")
-    Call<Check_login> login(
+    Call<LoginModel> login(
             @Field("username")String username,
             @Field("password")String password
     );
 
     @FormUrlEncoded
     @POST("api/register.php")
-    Call<List<User>> numUser(
+    Call<List<UserModel>> numUser(
             @Field("user_name")String user_name,
             @Field("user_s_name")String user_s_name,
             @Field("username")String username,
