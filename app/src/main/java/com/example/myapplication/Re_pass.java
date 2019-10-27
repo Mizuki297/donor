@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.models.LoginModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,15 +67,21 @@ public class Re_pass extends AppCompatActivity {
 
     }
     private void Update_password(String old_password,String new_password){
-        Call<Void> call = phpServiceAPI.update_pass(session.getUserId(),old_password,new_password);
-        call.enqueue(new Callback<Void>() {
+        Call<LoginModel> call = phpServiceAPI.update_pass(session.getUserId(),old_password,new_password);
+        call.enqueue(new Callback<LoginModel>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
+            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+                LoginModel updateInfo = response.body();
+                if (updateInfo.status == 0){
+                    Toast.makeText(getApplicationContext(),updateInfo.description,Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                }else{
+                    Toast.makeText(getApplicationContext(),updateInfo.description,Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<LoginModel> call, Throwable t) {
 
             }
         });

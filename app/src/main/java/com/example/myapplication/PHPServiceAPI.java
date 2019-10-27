@@ -22,7 +22,7 @@ public interface PHPServiceAPI {
 
     @FormUrlEncoded
     @POST("/api/get_post_user.php")
-    Call<List<UserModel>> getUser(
+    Call<UserModel> getUser(
             @Field("user_id") String user_id
     );
     @FormUrlEncoded
@@ -33,22 +33,12 @@ public interface PHPServiceAPI {
     //บัคการส่งข้อมูล
     @FormUrlEncoded
     @POST("/api/select_data.php")
-    Call<List<NumCatModel>> numCat(
+    Call<NumCatModel> numCat(
             @Field("user_id") String user_id,
             @Field("HPT_name") String HPT_name,
             @Field("Blood_type") String Blood_type
 
     );
-
-//    @FormUrlEncoded
-//    @POST("/api/get_post_request.php")
-//    Call<Void> createPost(
-//            @Field("HPT_name")String HPT_name,
-//
-//            @Field("Blood_type")String Blood_type,
-//
-//            @Field("user_id")int user_id
-//    );
 
     @FormUrlEncoded
     @POST("api/select_Cat.php")
@@ -71,7 +61,7 @@ public interface PHPServiceAPI {
 
     @FormUrlEncoded
     @POST("api/register.php")
-    Call<List<UserModel>> numUser(
+    Call<UserModel> numUser(
             @Field("user_name")String user_name,
             @Field("user_s_name")String user_s_name,
             @Field("username")String username,
@@ -131,7 +121,7 @@ public interface PHPServiceAPI {
     );
     @FormUrlEncoded
     @POST("api/update_pass.php")
-    Call<Void> update_pass(
+    Call<LoginModel> update_pass(
             @Field("user_id")String user_id,
             @Field("old_pass")String old_pass,
             @Field("password")String password

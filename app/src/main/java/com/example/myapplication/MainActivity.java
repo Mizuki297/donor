@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private View button_add,button_user;
 
     private TextView name,coin;
-    private String user_name,user_coin = "";
 
     private Session session;
 
@@ -184,35 +183,11 @@ public class MainActivity extends AppCompatActivity {
                     //เรียกใช้งานฟังก์ชันโดยโยน พารามิเตอร์ 2 ค่า
                     System.out.println(selectHospital);
                     System.out.println(radioButton.getText().toString());
-//                    createPost(selectHospital,radioButton.getText().toString());
                     onClick_button_search();
                 }
             }
         });
-
-
-    }//สร้างต่วส่งข้อมูลไป api
-    //สร้างฟังก์ชัน สำหรับสร้าตัวบันทึกข้อมูล โดยรับค่า 2 ค่า
-//    private void createPost(String HPT,String Blood) {
-//        //เรียกใช้ service createPost
-//        Call<Void> call = phpServiceAPI.createPost(HPT,Blood,);
-//        //รอการตอบกลับจาก API
-//        call.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//
-//                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-//                System.out.println(t.getMessage());
-//            }
-//        });
-////        แสดงกรณีบันทึกสำเร็จ
-//Toast.makeText(getApplicationContext(),"สำเร็จ",Toast.LENGTH_SHORT).show();
-//    }
+    }
 //เปลี่ยนหน้า
     public void onClick_button_search (){
         Intent intent = new Intent(this, PayDataCat.class);
@@ -227,11 +202,6 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<HospitalModel>>() {
             @Override
             public void onResponse(Call<List<HospitalModel>> call, Response<List<HospitalModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
                 List<HospitalModel> getList = response.body();
 
                 for (HospitalModel post: getList) {
@@ -253,36 +223,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getUser(String user_id) {
-        Call<List<UserModel>> call = phpServiceAPI.getUser(user_id);
+        Call<UserModel> call = phpServiceAPI.getUser(user_id);
 
-        call.enqueue(new Callback<List<UserModel>>() {
+        call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
-                List<UserModel> getList = response.body();
-
-                for (UserModel post: getList) {
-                    String content = "";
-                    content += "user_id: " + post.getUser_id() + "\n";
-                    content += "user_name: " + post.getUser_name() + "\n";
-                    content += "money_coin: " + post.getMoney_coin() + "\n";
-
-                    System.out.println(content);
-
-                    user_name = post.getUser_name();
-                    user_coin = post.getMoney_coin();
-
-                }
-                name.setText(user_name);
-                coin.setText(user_coin);
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel userInfo = response.body();
+                System.out.println(userInfo.getUser_name());
+                System.out.println(userInfo.getMoney_coin());
+                name.setText(userInfo.getUser_name());
+                coin.setText(userInfo.getMoney_coin());
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Progress");
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Loading.....");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         etUsername = (EditText) findViewById(R.id.Telephone);

@@ -97,11 +97,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 if (user_name.matches("") || user_s_name.matches("")
                 || username.matches("") || password.matches("")
                 || confirm_password.matches("") || user_email.matches("")
-                || user_tel.matches("") || user_line_id.matches("") || HPT_name == "กรุณาเลือกโรงพยาบาล"){
+                || user_tel.matches("") || user_line_id.matches("") || HPT_name.equals("กรุณาเลือกโรงพยาบาล")){
                     Toast.makeText(getApplicationContext(),"กรุณากรอกข้อมูลให้ครบ",Toast.LENGTH_SHORT).show();
 
                 }else if (!password.equals(confirm_password)){
-                    Toast.makeText(getApplicationContext(),"passwordไมตรงกัน",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"password ไมตรงกัน",Toast.LENGTH_SHORT).show();
                 }
 
                 else{
@@ -121,11 +121,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         call.enqueue(new Callback<List<HospitalModel>>() {
             @Override
             public void onResponse(Call<List<HospitalModel>> call, Response<List<HospitalModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
                 List<HospitalModel> getList = response.body();
 
                 for (HospitalModel post: getList) {
@@ -147,26 +142,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         });
     }
     private void Register(){
-        Call<List<UserModel>> call=phpServiceAPI.numUser(user_name, user_s_name, username, password, user_email, user_tel, user_line_id,HPT_name);
-        call.enqueue(new Callback<List<UserModel>>() {
+        Call<UserModel> call=phpServiceAPI.numUser(user_name, user_s_name, username, password, user_email, user_tel, user_line_id,HPT_name);
+        call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
-                List<UserModel> getlist = response.body();
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel registerInfo = response.body();
 
-                for (UserModel post:getlist){
-                    String user_re = post.getUser();
-                    System.out.println(user_re);
+                if (registerInfo.getStatus() == 0){
+                    System.out.println(registerInfo.getDescription());
+                }else{
+                    System.out.println(registerInfo.getDescription());
+                    onBackPressed();
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
 
             }
         });
-        onBackPressed();
+
     }
 
 }

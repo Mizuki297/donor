@@ -59,7 +59,8 @@ public class CatGridAdapter extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(CatGridAdapter.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }

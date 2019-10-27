@@ -7,6 +7,12 @@ public class NumCatModel {
     @SerializedName("numCat")
     private String numCat;
 
+    public NumCatModel(
+      String numCat
+    ){
+        this.numCat = numCat;
+    }
+
     public void setNumCat(String numCat) {
         this.numCat = numCat;
     }

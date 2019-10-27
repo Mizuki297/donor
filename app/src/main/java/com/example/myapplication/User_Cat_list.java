@@ -37,15 +37,13 @@ public class User_Cat_list extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
 
-    private ImageView back,plus,edit_data,search,personal;
+    private ImageView back,plus,search,personal;
     private ListView listview;
 
     private TextView name,coin;
 
     public static final String USER_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
 
-//    String user_id = "1";
-    ListView listView;
     private PHPServiceAPI phpServiceAPI;
     private Session session;
    @Override
@@ -67,7 +65,6 @@ public class User_Cat_list extends AppCompatActivity {
        back = (ImageView) findViewById(R.id.black);
        plus = (ImageView) findViewById(R.id.plus);
 
-       edit_data = (ImageView) findViewById(R.id.edit_data);
        search = (ImageView) findViewById(R.id.search);
        personal = (ImageView) findViewById(R.id.personal);
 
@@ -120,8 +117,7 @@ public class User_Cat_list extends AppCompatActivity {
            }
        });
 
-
-           back.setOnClickListener(new View.OnClickListener() {
+       back.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(User_Cat_list.this,MainActivity.class);
@@ -135,12 +131,6 @@ public class User_Cat_list extends AppCompatActivity {
                 startActivity(plus);
             }
         });
-//        edit_data.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,40 +144,26 @@ public class User_Cat_list extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
+   }
 
-    }
     private void getUser(String user_id) {
-        Call<List<UserModel>> call = phpServiceAPI.getUser(user_id);
+        Call<UserModel> call = phpServiceAPI.getUser(user_id);
 
-        call.enqueue(new Callback<List<UserModel>>() {
+        call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
-                List<UserModel> getList = response.body();
-
-                for (UserModel post: getList) {
-                    String content = "";
-                    content += "user_id: " + post.getUser_id() + "\n";
-                    content += "user_name: " + post.getUser_name() + "\n";
-                    content += "money_coin: " + post.getMoney_coin() + "\n";
-
-                    System.out.println(content);
-
-                    name.setText(post.getUser_name());
-                    coin.setText(post.getMoney_coin());
-                }
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel userInfo = response.body();
+                name.setText(userInfo.getUser_name());
+                coin.setText(userInfo.getMoney_coin());
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
     }
+
     private void  Update_Status (String cat_id, String status_cat){
         Call<Void> call = phpServiceAPI.Update_Status(cat_id,status_cat);
         call.enqueue(new Callback<Void>() {
@@ -279,8 +255,6 @@ public class User_Cat_list extends AppCompatActivity {
                 });
                 return row;
             }
-
-
         }
         private void populateListView(List<CatModel> body){
        listview = findViewById(R.id.listview);
@@ -291,7 +265,6 @@ public class User_Cat_list extends AppCompatActivity {
        Intent intent = new Intent(this,Editcat_info.class);
        intent.putExtra(USER_CAT_ID,id);
        startActivity(intent);
-        }
-
+   }
 }
 

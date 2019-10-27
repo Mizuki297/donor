@@ -102,27 +102,18 @@ public class PayDataCat extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"ชำระเงินสำเร็จ",Toast.LENGTH_SHORT).show();
     }
     private void numCat(String getUserID,String getHPT_name,String getBlood_type) {
-        Call<List<NumCatModel>> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
+        Call<NumCatModel> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
         //รอการตอบกลับจาก API
-        call.enqueue(new Callback<List<NumCatModel>>() {
+        call.enqueue(new Callback<NumCatModel>() {
             @Override
-            public void onResponse(Call<List<NumCatModel>> call, Response<List<NumCatModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-                List<NumCatModel> getList = response.body();
+            public void onResponse(Call<NumCatModel> call, Response<NumCatModel> response) {
 
-                for (NumCatModel post : getList) {
-                    String content = "";
-                    content += "numCat: " + post.getNumCat() + "\n";
-
-                    System.out.println(content);
-                    numCat_select.setText(post.getNumCat());
-                }
+                NumCatModel numCatInfo = response.body();
+                System.out.println(numCatInfo.getNumCat());
+                numCat_select.setText(numCatInfo.getNumCat());
             }
             @Override
-            public void onFailure(Call<List<NumCatModel>> call, Throwable t) {
+            public void onFailure(Call<NumCatModel> call, Throwable t) {
 
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
@@ -130,28 +121,18 @@ public class PayDataCat extends AppCompatActivity {
         });
     }
     private void getCoin() {
-        Call<List<UserModel>> call = phpServiceAPI.getUser(session.getUserId());
+        Call<UserModel> call = phpServiceAPI.getUser(session.getUserId());
 
-        call.enqueue(new Callback<List<UserModel>>() {
+        call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
-                if (!response.isSuccessful()) {
-                    // textViewResult.setText("Code: " + response.code());
-                    return;
-                }
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
-                List<UserModel> getList = response.body();
+                UserModel coinInfo = response.body();
+                user_coin.setText(coinInfo.getMoney_coin());
 
-                for (UserModel post: getList) {
-                    String content = "";
-                    content += "money_coin: " + post.getMoney_coin() + "\n";
-
-                    System.out.println(content);
-                    user_coin.setText(post.getMoney_coin());
-                }
             }
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });

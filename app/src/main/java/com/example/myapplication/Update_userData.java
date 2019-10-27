@@ -26,8 +26,6 @@ public class Update_userData extends AppCompatActivity {
     private Button ok;
     private ImageView back;
 
-    private String user_name,user_s_name,user_tal,user_line_id,user_password;
-
     private Session session;
 
 
@@ -70,44 +68,23 @@ public class Update_userData extends AppCompatActivity {
 
             }
         });
-
-
     }
     private void  getUser(String user_id){
-        Call<List<UserModel>> cal1 = phpServiceAPI.getUser(user_id);
+        Call<UserModel> cal1 = phpServiceAPI.getUser(user_id);
 
-        cal1.enqueue(new Callback<List<UserModel>>() {
+        cal1.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
-                List<UserModel> getlist = response.body();
-
-                for (UserModel post:getlist){
-                    user_name = post.getUser_name();
-                    user_s_name = post.getUser_s_name();
-                    user_tal = post.getUser_tel();
-                    user_line_id = post.getUser_line_id();
-                    user_password = post.getUser_password();
-
-                }
-                System.out.println(user_name);
-                System.out.println(user_s_name);
-                System.out.println(user_tal);
-                System.out.println(user_line_id);
-                System.out.println(user_password);
-
-                name.setText(user_name);
-                lastname.setText(user_s_name);
-                tel.setText(user_tal);
-                lineid.setText(user_line_id);
-
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel userInfo = response.body();
+                name.setText(userInfo.getUser_name());
+                lastname.setText(userInfo.getUser_s_name());
+                tel.setText(userInfo.getUser_tel());
+                lineid.setText(userInfo.getUser_line_id());
+            }
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
 
             }
-
-            @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
-
-            }
-
         });
     }
     private void update_user(String user_id, String user_name, String user_s_name, String user_tal, String user_line_id){
