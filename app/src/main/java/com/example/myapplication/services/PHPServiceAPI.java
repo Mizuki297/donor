@@ -95,7 +95,7 @@ public interface PHPServiceAPI {
     @FormUrlEncoded
     @POST("/api/update_cat.php")
     Call<Void> UpdateCat(
-            @Field("cat-id")String cat_id,
+            @Field("cat_id")String cat_id,
             @Field("cat_name") String cat_name,
             @Field("cat_type") String cat_type,
             @Field("blood_type") String blood_type,

@@ -115,7 +115,7 @@ public class User_Cat_list extends AppCompatActivity {
 
            @Override
            public void onFailure(Call<List<CatModel>> call, Throwable t) {
-               Toast.makeText(User_Cat_list.this, t.getMessage(), Toast.LENGTH_LONG).show();
+//               Toast.makeText(User_Cat_list.this, t.getMessage(), Toast.LENGTH_LONG).show();
            }
        });
 

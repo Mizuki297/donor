@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private String user_line_id;
     private String HPT_name;
 
+    private ImageView back;
+
     private ProgressDialog progressDialog;
 
     @Override
@@ -64,6 +67,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         etLineID = (EditText) findViewById(R.id.etLineID);
         bRegister = (Button) findViewById(R.id.bRegister);
         spinnerHospital = (Spinner) findViewById(R.id.etHospital);
+        back = (ImageView) findViewById(R.id.back);
 
         hospitalList.add("กรุณาเลือกโรงพยาบาล");
 
@@ -124,6 +128,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
 
                 break;
+            case R.id.back:
+                onBackPressed();
+                break;
 
         }
 
@@ -165,6 +172,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     System.out.println(registerInfo.getDescription());
                 }else{
                     System.out.println(registerInfo.getDescription());
+                    Toast.makeText(getApplicationContext(),registerInfo.getDescription(),Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     Intent intent = new Intent(Register.this,Login.class);
                     startActivity(intent);

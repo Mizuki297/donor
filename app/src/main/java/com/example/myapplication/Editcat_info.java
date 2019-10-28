@@ -39,7 +39,7 @@ public class Editcat_info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editcat_info);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String cat_id = intent.getStringExtra(User_Cat_list.USER_CAT_ID);
 
         name_cat = (EditText) findViewById(R.id.name_cat);
@@ -91,12 +91,13 @@ public class Editcat_info extends AppCompatActivity {
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(Editcat_info.this,menu);
                 popup.getMenuInflater().inflate(R.menu.statusmenu,popup.getMenu());
-
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         Toast.makeText(Editcat_info.this,"" + item.getTitle(), Toast.LENGTH_LONG).show();
                         Update_Status(cat_id,"2");
+                        Intent intent = new Intent(Editcat_info.this,User_Cat_list.class);
+                        startActivity(intent);
                         return true;
                     }
                 });

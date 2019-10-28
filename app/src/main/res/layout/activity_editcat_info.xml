@@ -20,7 +20,7 @@
         android:id="@+id/headpam"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:hint="@string/pem"
+        android:text="@string/head_catinfo"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/head"
         app:layout_constraintEnd_toEndOf="parent"

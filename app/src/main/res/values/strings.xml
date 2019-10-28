@@ -84,4 +84,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="User_name">ชื่อผู้ใช้งาน</string>
     <string name="coin_icon">coin_icon</string>
+    <string name="head_catinfo">แก้ไขข้อมูลแมว</string>
 </resources>

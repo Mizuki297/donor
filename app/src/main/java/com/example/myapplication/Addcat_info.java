@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.uploadcare.android.library.api.UploadcareClient;
@@ -49,7 +51,11 @@ public class Addcat_info extends AppCompatActivity {
     private ImageView imageblack;
     private int GALLERY_REQUEST_CODE = 1;
 
+    private String response_image = "";
+
     private String file = "";
+
+    private ProgressDialog progressDialog;
 
     private Session session;
 
@@ -61,12 +67,12 @@ public class Addcat_info extends AppCompatActivity {
         session = new Session(getApplicationContext());
         System.out.println(session.getUserId());
 
-        Gson gson = new GsonBuilder().serializeNulls().create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://glyphographic-runwa.000webhostapp.com")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        phpServiceAPI = retrofit.create(PHPServiceAPI.class);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Progress");
+        progressDialog.setMessage("Loading.....");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
 
         name_cat = (EditText) findViewById(R.id.name_cat);
@@ -115,6 +121,9 @@ public class Addcat_info extends AppCompatActivity {
                   latest_donation = blooddate.getText().toString();
                   System.out.println(latest_donation);
 
+                    progressDialog.show();
+                    progressDialog.setCancelable(false);
+
                   if (file == ""){
                       Toast.makeText(getApplicationContext(),"กรุณาเลือกรูปภาพ", Toast.LENGTH_LONG).show();
                   }else {
@@ -135,13 +144,13 @@ public class Addcat_info extends AppCompatActivity {
                               @Override
                               public void onSuccess(UploadcareFile uploadcareFile) {
                                   System.out.println(uploadcareFile.getOriginalFileUrl());
-                                  String response_image = uploadcareFile.getOriginalFileUrl().toString();
-
-                                  AddCat(cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation,response_image);
+                                  response_image = uploadcareFile.getOriginalFileUrl().toString();
+                                  if (response_image != null || response_image != ""){
+                                      AddCat(cat_name, cat_type, blood_type, cat_bd, cat_weight, health_check_date, latest_donation, response_image);
+                                  }
                               }
                           });
-                      Intent ok = new Intent(Addcat_info.this, User_Cat_list.class);
-                          startActivity(ok);
+                          progressDialog.dismiss();
                       }
                   }
             }
@@ -170,7 +179,10 @@ public class Addcat_info extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(getApplicationContext(),"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_LONG).show();
 
+                Intent ok = new Intent(Addcat_info.this, User_Cat_list.class);
+                startActivity(ok);
             }
 
             @Override
@@ -179,10 +191,7 @@ public class Addcat_info extends AppCompatActivity {
 
             }
         });
-        
-        Toast.makeText(getApplicationContext(),"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_LONG).show();
-
-
+//        progressDialog.dismiss();
     }
 
     private void pickFromGallery(){
