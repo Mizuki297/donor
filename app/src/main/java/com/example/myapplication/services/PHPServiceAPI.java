@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.services;
 
 import com.example.myapplication.models.CatModel;
 import com.example.myapplication.models.HospitalModel;

@@ -24,6 +24,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.myapplication.models.CatModel;
 import com.example.myapplication.models.UserModel;
+import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 

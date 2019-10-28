@@ -22,12 +22,10 @@
         android:layout_height="30dp"
         android:hint="@string/pem"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/head"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/head"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toTopOf="@+id/head" />
 
     <EditText
         android:id="@+id/name_cat"
@@ -183,8 +181,9 @@
 
     <ImageView
         android:id="@+id/imageblack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
         android:contentDescription="@string/black"
         app:layout_constraintBottom_toBottomOf="@+id/head"
         app:layout_constraintEnd_toStartOf="@+id/headpam"
@@ -197,6 +196,7 @@
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:contentDescription="@string/manu"
         android:cropToPadding="true"
         app:layout_constraintBottom_toBottomOf="@+id/head"
@@ -204,7 +204,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/headpam"
         app:layout_constraintTop_toTopOf="@+id/head"
-        app:layout_constraintVertical_bias="0.833"
         app:srcCompat="@drawable/menu" />
 
 

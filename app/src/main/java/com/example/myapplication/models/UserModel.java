@@ -8,7 +8,7 @@ public class UserModel {
     private String user_id;
 
     @SerializedName("user_name")
-    private String user_name;
+    public String user_name;
 
     @SerializedName("user_s_name")
     private String user_s_name;
@@ -26,7 +26,7 @@ public class UserModel {
     private String user_line_id;
 
     @SerializedName("money_coin")
-    private String money_coin;
+    public String money_coin;
 
     @SerializedName("status")
     private int status;

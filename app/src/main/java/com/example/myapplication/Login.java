@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.models.LoginModel;
+import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -81,24 +82,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             call.enqueue(new Callback<LoginModel>() {
                 @Override
                 public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
-//                    LoginModel getList = response.body();
-//                        user_id = getList.getUser_id();
-//
-//                    session = new Session(getApplicationContext());
-//                    session.setUserId(user_id);
-//
-//                    System.out.println(session.getUserId());
-//                    if (user_id != null){
-//                        if (user_id.equals("0")){
-//                            Toast.makeText(getApplicationContext(),"login Not ok",Toast.LENGTH_LONG).show();
-//                            progressDialog.dismiss();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(),"login ok",Toast.LENGTH_LONG).show();
-//                            Intent intent = new Intent(Login.this,MainActivity.class);
-//                            progressDialog.dismiss();
-//                            startActivity(intent);
-//                        }
-//                    }
                     LoginModel userInfo = response.body();
                     if (userInfo.status == 0){
                         session.setUserId(userInfo.user_id);

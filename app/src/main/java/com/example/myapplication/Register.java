@@ -5,6 +5,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.myapplication.models.HospitalModel;
 import com.example.myapplication.models.UserModel;
+import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +41,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private String user_line_id;
     private String HPT_name;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        phpServiceAPI=RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Progress");
+        progressDialog.setMessage("Loading.....");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        phpServiceAPI= RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
         etName = (EditText) findViewById(R.id.etName);
         etLastname = (EditText) findViewById(R.id.etLastname);
         etUsername = (EditText) findViewById(R.id.etUsername);
@@ -107,6 +118,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 else{
                     System.out.println(user_name + user_s_name +  username + password + confirm_password
                             + user_email + user_tel + user_line_id);
+                    progressDialog.show();
+                    progressDialog.setCancelable(false);
                     Register();
                 }
 
@@ -152,7 +165,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     System.out.println(registerInfo.getDescription());
                 }else{
                     System.out.println(registerInfo.getDescription());
-                    onBackPressed();
+                    progressDialog.dismiss();
+                    Intent intent = new Intent(Register.this,Login.class);
+                    startActivity(intent);
                 }
             }
 

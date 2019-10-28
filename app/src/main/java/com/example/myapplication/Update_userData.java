@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.models.UserModel;
-
-import java.util.List;
+import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +19,7 @@ import retrofit2.Response;
 
 public class Update_userData extends AppCompatActivity {
 
-    private  PHPServiceAPI phpServiceAPI;
+    private PHPServiceAPI phpServiceAPI;
 
     private EditText name,lastname,tel;
     private TextView lineid;

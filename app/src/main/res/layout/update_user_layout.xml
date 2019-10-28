@@ -24,56 +24,67 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="148dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/editdata"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/name"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
         android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3"
-        android:autofillHints="" tools:targetApi="o" />
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/lastname"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/lastname"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
         android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="@string/lastname"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        android:autofillHints="" tools:targetApi="o" />
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/tel"
-        android:layout_width="220dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/tel"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
         android:background="@drawable/shape"
+        android:ems="10"
+        android:hint="@string/tel"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/lastname"
-        android:autofillHints="" tools:targetApi="o" />
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/ok"
@@ -89,42 +100,42 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/icon1"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
         app:srcCompat="@drawable/leftarrow_121320" />
 
     <View
         android:id="@+id/view2"
-        android:layout_width="219dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/linee"
-        app:layout_constraintBottom_toBottomOf="@+id/lineid"
-        app:layout_constraintEnd_toEndOf="@+id/lineid"
-        app:layout_constraintStart_toStartOf="@+id/lineid"
-        app:layout_constraintTop_toTopOf="@+id/lineid" />
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toBottomOf="@+id/tel" />
 
     <TextView
         android:id="@+id/lineid"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:autofillHints=""
-        android:ems="10"
 
+        android:ems="10"
         android:text="@string/lineID"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tel"
-        app:layout_constraintVertical_bias="0.115"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/view2"
         tools:targetApi="o" />
 
     <ImageView

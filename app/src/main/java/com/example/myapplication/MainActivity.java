@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.example.myapplication.models.HospitalModel;
 import com.example.myapplication.models.UserModel;
+import com.example.myapplication.services.PHPServiceAPI;
+import com.example.myapplication.services.RetrofitInstance;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -66,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         System.out.println(session.getUserId());
 
-        if (session.getUserId() == "" || session.getUserId() == null){
+        if (session.getUserId().equals("") || session.getUserId() == null){
             Intent intent = new Intent(MainActivity.this,Login.class);
             startActivity(intent);
-        }
+        }else{
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
@@ -97,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
-
-        getUser(session.getUserId());
 
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.menu_update_user
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        getUser(session.getUserId());
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        }
     }
 //เปลี่ยนหน้า
     public void onClick_button_search (){

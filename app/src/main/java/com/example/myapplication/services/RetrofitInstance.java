@@ -1,4 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.services;
+
+import com.example.myapplication.BuildConfig;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

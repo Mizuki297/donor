@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:scrollbarSize="4dp"
         android:text="@string/registered_cat"
+        android:textColor="#020202"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -41,15 +42,16 @@
 
     <ImageView
         android:id="@+id/black"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/black"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/leftarrow_121320"
-        android:contentDescription="@string/black" />
+        app:srcCompat="@drawable/leftarrow_121320" />
 
     <ImageView
         android:id="@+id/plus"
