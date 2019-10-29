@@ -96,6 +96,7 @@ public class User_Cat_list extends AppCompatActivity {
                        break;
                    case R.id.menu_logout:
                        Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
+                       session.clearUserId();
                        Intent intent3 = new Intent(User_Cat_list.this,Login.class);
                        startActivity(intent3);
                        break;
