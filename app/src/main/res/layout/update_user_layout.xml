@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/back_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"

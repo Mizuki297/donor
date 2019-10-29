@@ -67,7 +67,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         etLineID = (EditText) findViewById(R.id.etLineID);
         bRegister = (Button) findViewById(R.id.bRegister);
         spinnerHospital = (Spinner) findViewById(R.id.etHospital);
-        back = (ImageView) findViewById(R.id.back);
+        back = (ImageView) findViewById(R.id.back_icon);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         hospitalList.add("กรุณาเลือกโรงพยาบาล");
 
@@ -128,10 +135,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
 
                 break;
-            case R.id.back:
-                onBackPressed();
-                break;
-
         }
 
     }
@@ -170,6 +173,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                 if (registerInfo.getStatus() == 0){
                     System.out.println(registerInfo.getDescription());
+                    Toast.makeText(getApplicationContext(),registerInfo.getDescription(),Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else{
                     System.out.println(registerInfo.getDescription());
                     Toast.makeText(getApplicationContext(),registerInfo.getDescription(),Toast.LENGTH_SHORT).show();

@@ -45,7 +45,7 @@ public class Update_userData extends AppCompatActivity {
         tel = (EditText) findViewById(R.id.tel);
         lineid = (TextView) findViewById(R.id.lineid);
         ok = (Button) findViewById(R.id.ok);
-        back = (ImageView)findViewById(R.id.back);
+        back = (ImageView)findViewById(R.id.back_icon);
 
 
         getUser(session.getUserId());
