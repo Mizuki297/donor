@@ -29,6 +29,8 @@ public class PayDataCat extends AppCompatActivity {
 
     public Button pay_button;
 
+    public String numCat = "0";
+
     private Session session;
 
     @Override
@@ -71,8 +73,12 @@ public class PayDataCat extends AppCompatActivity {
                 if (user_coin.getText().toString().length() <= 1){
                     Toast.makeText(getApplicationContext(),"ยอดเงินไม่เพียงพอ",Toast.LENGTH_SHORT).show();
                 }else{
-                    updateCoin(session.getUserId());
-                    onNextSelect(getBlood_type,getHPT_name);
+                    if(numCat.equals("0")){
+                        Toast.makeText(getApplicationContext(),"ไม่มีคนที่พล้อมบริจาคจะชำระเงินทำไม",Toast.LENGTH_SHORT).show();
+                    }else {
+                        updateCoin(session.getUserId());
+                        onNextSelect(getBlood_type, getHPT_name);
+                    }
                 }
             }
         });
@@ -110,6 +116,7 @@ public class PayDataCat extends AppCompatActivity {
 
                 NumCatModel numCatInfo = response.body();
                 System.out.println(numCatInfo.getNumCat());
+                numCat = numCatInfo.getNumCat();
                 numCat_select.setText(numCatInfo.getNumCat());
             }
             @Override
