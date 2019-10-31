@@ -39,8 +39,8 @@
     <string name="pem">เพิ่มข้อมูล</string>
     <string name="cat">ชื่อแมว</string>
     <string name="group">กรุ๊ปเลือด</string>
-    <string name="ago">อายุ</string>
-    <string name="namnac">น้ำหนัก</string>
+    <string name="ago">อายุ(ปี)</string>
+    <string name="namnac">น้ำหนัก(kg)</string>
     <string name="date">วันที่ตรวจสุขภาพล่าสุด yyyy-mm-dd</string>
     <string name="blood">วันที่บริจาคเลือดล่าสุด yyyy-mm-dd</string>
     <string name="wet">*แมวที่บริจาคเลือดได้ต้องมีอายู 2-3 ปีขึ้นไปและมีน้ำหนักมากกว่า 3 กิโลกรัมขึ้นไป</string>

@@ -108,6 +108,10 @@ public class Addcat_info extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                 progressDialog.show();
+                 progressDialog.setCancelable(false);
+
                   cat_name = name_cat.getText().toString();
                   System.out.println(cat_name);
                   cat_type = name_type.getText().toString();
@@ -121,36 +125,41 @@ public class Addcat_info extends AppCompatActivity {
                   latest_donation = blooddate.getText().toString();
                   System.out.println(latest_donation);
 
-                    progressDialog.show();
-                    progressDialog.setCancelable(false);
 
                   if (file == ""){
                       Toast.makeText(getApplicationContext(),"กรุณาเลือกรูปภาพ", Toast.LENGTH_LONG).show();
+                      progressDialog.dismiss();
                   }else {
                       if (cat_name.matches("") || cat_type.matches("") || blood_type.matches("กรุ๊ปเลือด") || cat_bd.matches("1") || cat_weight.matches("2")
-                              || cat_weight.matches("1") || health_check_date.matches("") || latest_donation.matches("")){
+                              || cat_weight.matches("1") || health_check_date.matches("") || latest_donation.matches("")) {
                           Toast.makeText(getApplicationContext(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
+                          progressDialog.dismiss();
                       } else {
 
-                          UploadcareClient client = new UploadcareClient(BuildConfig.UPLOADCARE_PUB_KEY,BuildConfig.UPLOADCARE_PRI_KEY);
-                          Context context = getApplicationContext();
-                          Uploader uploader = new FileUploader(client,uri,context).store(true);
-                          uploader.uploadAsync(new UploadcareFileCallback() {
-                              @Override
-                              public void onFailure(@NotNull UploadcareApiException e) {
-                                    System.out.println(e.getMessage());
-                              }
-
-                              @Override
-                              public void onSuccess(UploadcareFile uploadcareFile) {
-                                  System.out.println(uploadcareFile.getOriginalFileUrl());
-                                  response_image = uploadcareFile.getOriginalFileUrl().toString();
-                                  if (response_image != null || response_image != ""){
-                                      AddCat(cat_name, cat_type, blood_type, cat_bd, cat_weight, health_check_date, latest_donation, response_image);
+                          if (Integer.parseInt(cat_bd) < 3 || Integer.parseInt(cat_weight) < 3){
+                              Toast.makeText(getApplicationContext(),"แมวของคุณต้องมีน้ำหนัก 3 kg และอายุ 3 ปีขึ้นไป",Toast.LENGTH_LONG).show();
+                          }else {
+                              UploadcareClient client = new UploadcareClient(BuildConfig.UPLOADCARE_PUB_KEY, BuildConfig.UPLOADCARE_PRI_KEY);
+                              Context context = getApplicationContext();
+                              Uploader uploader = new FileUploader(client, uri, context).store(true);
+                              uploader.uploadAsync(new UploadcareFileCallback() {
+                                  @Override
+                                  public void onFailure(@NotNull UploadcareApiException e) {
+                                      System.out.println(e.getMessage());
+                                      progressDialog.dismiss();
                                   }
-                              }
-                          });
-                          progressDialog.dismiss();
+
+                                  @Override
+                                  public void onSuccess(UploadcareFile uploadcareFile) {
+                                      System.out.println(uploadcareFile.getOriginalFileUrl());
+                                      response_image = uploadcareFile.getOriginalFileUrl().toString();
+                                      if (response_image != null || response_image != "") {
+                                          AddCat(cat_name, cat_type, blood_type, cat_bd, cat_weight, health_check_date, latest_donation, response_image);
+                                          progressDialog.dismiss();
+                                      }
+                                  }
+                              });
+                          }
                       }
                   }
             }
@@ -175,6 +184,7 @@ public class Addcat_info extends AppCompatActivity {
     }
     private void AddCat(String cat_name, String cat_type, String blood_type, String cat_bd, String cat_weight
                         , String health_check_date, String latest_donation, String Url_image){
+
         Call<Void> call = phpServiceAPI.AddCat(cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation,session.getUserId(),Url_image);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -191,7 +201,7 @@ public class Addcat_info extends AppCompatActivity {
 
             }
         });
-//        progressDialog.dismiss();
+        progressDialog.dismiss();
     }
 
     private void pickFromGallery(){
