@@ -67,11 +67,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="6dp"
         android:autofillHints=""
         android:hint="@string/ago"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintBottom_toTopOf="@+id/view10"
         app:layout_constraintEnd_toStartOf="@+id/nam1"
         app:layout_constraintStart_toEndOf="@+id/sapin"
         app:layout_constraintTop_toBottomOf="@+id/name_type" />
@@ -86,45 +86,102 @@
         android:ems="10"
         android:hint="@string/namnac"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintBottom_toTopOf="@+id/view10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ago1"
-        app:layout_constraintTop_toBottomOf="@+id/name_type"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintTop_toBottomOf="@+id/name_type" />
 
-    <EditText
-        android:id="@+id/date1"
+    <View
+        android:id="@+id/view10"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="6dp"
-        android:ems="10"
-        android:hint="@string/date"
-        android:importantForAutofill="no"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/blooddaet"
+        app:layout_constraintBottom_toTopOf="@+id/view11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ago1" />
 
-    <EditText
-        android:id="@+id/blooddaet"
+    <TextView
+        android:id="@+id/datetext"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/date"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view10"
+        app:layout_constraintEnd_toStartOf="@id/date"
+        app:layout_constraintStart_toStartOf="@+id/view10"
+        app:layout_constraintTop_toTopOf="@+id/view10" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/yyyy_mm_dd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view10"
+        app:layout_constraintEnd_toStartOf="@+id/cal1"
+        app:layout_constraintStart_toEndOf="@+id/datetext"
+        app:layout_constraintTop_toTopOf="@+id/view10" />
+
+    <ImageView
+        android:id="@+id/cal1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/calicon"
+        app:layout_constraintBottom_toBottomOf="@+id/view10"
+        app:layout_constraintEnd_toEndOf="@+id/view10"
+        app:layout_constraintStart_toEndOf="@id/date"
+        app:layout_constraintTop_toTopOf="@+id/view10"
+        app:srcCompat="@drawable/cal" />
+
+    <View
+        android:id="@+id/view11"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="2dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/blood"
-        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date1" />
+        app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+    <TextView
+        android:id="@+id/blooddatetext"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:hint="@string/blood"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toStartOf="@id/blooddate"
+        app:layout_constraintStart_toStartOf="@+id/view11"
+        app:layout_constraintTop_toTopOf="@+id/view11" />
+
+    <TextView
+        android:id="@+id/blooddate"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/yyyy_mm_dd"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toStartOf="@+id/cal2"
+        app:layout_constraintStart_toEndOf="@+id/blooddatetext"
+        app:layout_constraintTop_toTopOf="@+id/view11" />
+
+    <ImageView
+        android:id="@+id/cal2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/callicon"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintStart_toEndOf="@+id/blooddate"
+        app:layout_constraintTop_toTopOf="@+id/view11"
+        app:srcCompat="@drawable/cal" />
 
     <TextView
         android:id="@+id/textView"
@@ -141,13 +198,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blooddaet" />
+        app:layout_constraintTop_toBottomOf="@+id/view11" />
 
     <Button
         android:id="@+id/ok"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/red"
         android:text="@string/ok"
         android:textColor="#ffff"
@@ -162,14 +220,12 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="6dp"
         android:entries="@array/groupblood"
-        app:layout_constraintBottom_toTopOf="@+id/date1"
+        app:layout_constraintBottom_toTopOf="@+id/view10"
         app:layout_constraintEnd_toStartOf="@+id/ago1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_type"
-        app:layout_constraintVertical_bias="0.524" />
+        app:layout_constraintTop_toBottomOf="@+id/name_type" />
 
     <ImageView
         android:id="@+id/image"

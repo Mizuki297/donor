@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,17 +11,17 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.services.PHPServiceAPI;
 import com.example.myapplication.services.RetrofitInstance;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.uploadcare.android.library.api.UploadcareClient;
 import com.uploadcare.android.library.api.UploadcareFile;
 import com.uploadcare.android.library.callbacks.UploadcareFileCallback;
@@ -31,25 +32,28 @@ import com.uploadcare.android.library.upload.Uploader;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Addcat_info extends AppCompatActivity {
 
     private PHPServiceAPI phpServiceAPI;
 
-    private EditText name_cat,name_type, ago1, nam1, date1, blooddate;
+    private TextView hcd,ld;
+
+    private EditText name_cat,name_type, ago1, nam1;
     private Spinner sapin;
     private Button ok;
     private ImageView image;
     private Uri uri = null;
     private String cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation = "";
-    private ImageView imageblack;
+    private ImageView imageblack,cal1,cal2;
     private int GALLERY_REQUEST_CODE = 1;
+
+    private int intDay,intMonth,intYear;
 
     private String response_image = "";
 
@@ -74,13 +78,18 @@ public class Addcat_info extends AppCompatActivity {
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
+        getCurrentDateTime();
 
         name_cat = (EditText) findViewById(R.id.name_cat);
         name_type = (EditText) findViewById(R.id.name_type);
         ago1 = (EditText) findViewById(R.id.ago1);
         nam1 = (EditText) findViewById(R.id.nam1);
-        date1 = (EditText) findViewById(R.id.date1);
-        blooddate = (EditText) findViewById(R.id.blooddaet);
+
+        hcd = (TextView) findViewById(R.id.date);
+        ld = (TextView) findViewById(R.id.blooddate);
+
+        cal1 = (ImageView) findViewById(R.id.cal1);
+        cal2 = (ImageView) findViewById(R.id.cal2);
         sapin = (Spinner) findViewById(R.id.sapin);
         ok = (Button) findViewById(R.id.ok);
         image = (ImageView) findViewById(R.id.image);
@@ -105,6 +114,19 @@ public class Addcat_info extends AppCompatActivity {
             }
         });
 
+        cal1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog();
+            }
+        });
+        cal2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog1();
+            }
+        });
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,11 +142,6 @@ public class Addcat_info extends AppCompatActivity {
                   System.out.println(cat_bd);
                   cat_weight = nam1.getText().toString();
                   System.out.println(cat_weight);
-                  health_check_date = date1.getText().toString();
-                  System.out.println(health_check_date);
-                  latest_donation = blooddate.getText().toString();
-                  System.out.println(latest_donation);
-
 
                   if (file == ""){
                       Toast.makeText(getApplicationContext(),"กรุณาเลือกรูปภาพ", Toast.LENGTH_LONG).show();
@@ -224,5 +241,41 @@ public class Addcat_info extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    private void getCurrentDateTime(){
+        Calendar calendar = Calendar.getInstance();
+        intDay = calendar.get(Calendar.DAY_OF_MONTH);
+        intMonth = calendar.get(Calendar.MONTH);
+        intYear = calendar.get(Calendar.YEAR);
+
+//        date.setText(intYear+"/"+intMonth+"/"+intDay);
+    }
+    private void showDateDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Addcat_info.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month +1;
+                        hcd.setText(year+"/"+month+"/"+day);
+                        System.out.println(hcd.getText());
+                        health_check_date = hcd.getText().toString();
+                        System.out.println(health_check_date);
+                    }
+                },intYear,intMonth,intDay);
+        datePickerDialog.show();
+    }
+    private void showDateDialog1(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Addcat_info.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month +1;
+                        ld.setText(year+"/"+month+"/"+day);
+                        System.out.println(ld.getText());
+                        latest_donation = ld.getText().toString();
+                        System.out.println(latest_donation);
+                    }
+                },intYear,intMonth,intDay);
+        datePickerDialog.show();
     }
 }

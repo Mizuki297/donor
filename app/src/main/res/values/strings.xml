@@ -29,7 +29,7 @@
     <string name="cat_age">อายุ</string>
     <string name="cat_weight">น้ำหนัก</string>
     <string name="cat_Health_check_date">วันที่ตรวจสุขภาพ</string>
-    <string name="cat_Latest_donation">วันที่บริจาคเลือดล่าสุด</string>
+    <string name="cat_Latest_donation">วันที่บริจาคเลือด</string>
     <string name="Line">Line</string>
     <string name="Search">ผลการค้นหา</string>
     <string name="tell_button">tell_button</string>
@@ -40,9 +40,9 @@
     <string name="cat">ชื่อแมว</string>
     <string name="group">กรุ๊ปเลือด</string>
     <string name="ago">อายุ(ปี)</string>
-    <string name="namnac">น้ำหนัก(kg)</string>
-    <string name="date">วันที่ตรวจสุขภาพล่าสุด yyyy-mm-dd</string>
-    <string name="blood">วันที่บริจาคเลือดล่าสุด yyyy-mm-dd</string>
+    <string name="namnac">น้ำหนัก(กก.)</string>
+    <string name="date">วันที่ตรวจสุขภาพ</string>
+    <string name="blood">วันที่บริจาคเลือด</string>
     <string name="wet">*แมวที่บริจาคเลือดได้ต้องมีอายู 2-3 ปีขึ้นไปและมีน้ำหนักมากกว่า 3 กิโลกรัมขึ้นไป</string>
     <string name="ok">ยืนยัน</string>
     <string name="_111">111</string>
@@ -85,4 +85,9 @@
     <string name="User_name">ชื่อผู้ใช้งาน</string>
     <string name="coin_icon">coin_icon</string>
     <string name="head_catinfo">แก้ไขข้อมูลแมว</string>
+    <string name="y">ปี</string>
+    <string name="kg">กก.</string>
+    <string name="yyyy_mm_dd">yyyy/mm/dd</string>
+    <string name="calicon">calIcon</string>
+    <string name="callicon">callIcon</string>
 </resources>

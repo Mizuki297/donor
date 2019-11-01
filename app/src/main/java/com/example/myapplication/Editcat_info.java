@@ -1,13 +1,16 @@
 package com.example.myapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,8 @@ import com.example.myapplication.services.PHPServiceAPI;
 import com.example.myapplication.services.RetrofitInstance;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,13 +30,16 @@ public class Editcat_info extends AppCompatActivity {
 
     private PHPServiceAPI phpServiceAPI;
 
-    private EditText name_cat,name_type, ago1, nam1, date1, blooddate,groupblood;
+    private EditText name_cat,name_type, ago1, nam1,groupblood;
     private Button ok;
     private ImageView image,menu;
-//    private Uri uri;
+
+    private TextView hcd,ld;
+
     private String cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation,blood_type2 = "";
-    private ImageView imageblack;
-//    private int GALLERY_REQUEST_CODE = 1;
+    private ImageView imageblack,cal1,cal2;
+
+    private int intDay,intMonth,intYear;
 
 
     @Override
@@ -46,8 +54,13 @@ public class Editcat_info extends AppCompatActivity {
         name_type = (EditText) findViewById(R.id.name_type);
         ago1 = (EditText) findViewById(R.id.ago1);
         nam1 = (EditText) findViewById(R.id.nam1);
-        date1 = (EditText) findViewById(R.id.date1);
-        blooddate = (EditText) findViewById(R.id.blooddaet);
+
+        hcd = (TextView) findViewById(R.id.date);
+        ld = (TextView) findViewById(R.id.blooddate);
+
+        cal1 = (ImageView) findViewById(R.id.cal1);
+        cal2 = (ImageView) findViewById(R.id.cal2);
+
         groupblood= (EditText) findViewById(R.id.groupblood);
         ok = (Button) findViewById(R.id.ok);
         image = (ImageView) findViewById(R.id.image);
@@ -68,8 +81,8 @@ public class Editcat_info extends AppCompatActivity {
                 name_type.setText(catDetail.getCat_type());
                 ago1.setText(catDetail.getCat_bd());
                 nam1.setText(catDetail.getCat_weight());
-                date1.setText(catDetail.getHealth_check_date());
-                blooddate.setText(catDetail.getLatest_donation());
+                hcd.setText(catDetail.getHealth_check_date());
+                ld.setText(catDetail.getLatest_donation());
                 groupblood.setText(catDetail.getBlood_type());
 
                  if (catDetail.getUrl_cat() !=null && catDetail.getUrl_cat().length()>0){
@@ -117,6 +130,18 @@ public class Editcat_info extends AppCompatActivity {
                 startActivity(black1);
             }
         });
+        cal1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog();
+            }
+        });
+        cal2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog1();
+            }
+        });
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,10 +154,10 @@ public class Editcat_info extends AppCompatActivity {
                 System.out.println(cat_bd);
                 cat_weight = nam1.getText().toString();
                 System.out.println(cat_weight);
-                health_check_date = date1.getText().toString();
-                System.out.println(health_check_date);
-                latest_donation = blooddate.getText().toString();
-                System.out.println(latest_donation);
+//                health_check_date = date1.getText().toString();
+//                System.out.println(health_check_date);
+//                latest_donation = blooddate.getText().toString();
+//                System.out.println(latest_donation);
                 blood_type = groupblood.getText().toString();
                 System.out.println(blood_type);
 
@@ -183,11 +208,43 @@ public class Editcat_info extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
-        });
-
-        Toast.makeText(getApplicationContext(),"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_LONG).show();
-            }
-
-
+        });Toast.makeText(getApplicationContext(),"บันทึกข้อมูลสำเร็จ", Toast.LENGTH_LONG).show();
     }
+    private void getCurrentDateTime(){
+        Calendar calendar = Calendar.getInstance();
+        intDay = calendar.get(Calendar.DAY_OF_MONTH);
+        intMonth = calendar.get(Calendar.MONTH);
+        intYear = calendar.get(Calendar.YEAR);
+
+//        date.setText(intYear+"/"+intMonth+"/"+intDay);
+    }
+    private void showDateDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Editcat_info.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month +1;
+                        hcd.setText(year+"/"+month+"/"+day);
+                        System.out.println(hcd.getText());
+                        health_check_date = hcd.getText().toString();
+                        System.out.println(health_check_date);
+                    }
+                },intYear,intMonth,intDay);
+        datePickerDialog.show();
+    }
+    private void showDateDialog1(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Editcat_info.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month +1;
+                        ld.setText(year+"/"+month+"/"+day);
+                        System.out.println(ld.getText());
+                        latest_donation = ld.getText().toString();
+                        System.out.println(latest_donation);
+                    }
+                },intYear,intMonth,intDay);
+        datePickerDialog.show();
+    }
+}
 
