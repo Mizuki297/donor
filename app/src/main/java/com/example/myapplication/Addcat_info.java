@@ -154,6 +154,7 @@ public class Addcat_info extends AppCompatActivity {
                       } else {
 
                           if (Integer.parseInt(cat_bd) < 3 || Integer.parseInt(cat_weight) < 3){
+                              progressDialog.dismiss();
                               Toast.makeText(getApplicationContext(),"แมวของคุณต้องมีน้ำหนัก 3 kg และอายุ 3 ปีขึ้นไป",Toast.LENGTH_LONG).show();
                           }else {
                               UploadcareClient client = new UploadcareClient(BuildConfig.UPLOADCARE_PUB_KEY, BuildConfig.UPLOADCARE_PRI_KEY);

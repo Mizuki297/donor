@@ -154,10 +154,10 @@ public class Editcat_info extends AppCompatActivity {
                 System.out.println(cat_bd);
                 cat_weight = nam1.getText().toString();
                 System.out.println(cat_weight);
-//                health_check_date = date1.getText().toString();
-//                System.out.println(health_check_date);
-//                latest_donation = blooddate.getText().toString();
-//                System.out.println(latest_donation);
+                health_check_date = hcd.getText().toString();
+                System.out.println(health_check_date);
+                latest_donation = ld.getText().toString();
+                System.out.println(latest_donation);
                 blood_type = groupblood.getText().toString();
                 System.out.println(blood_type);
 
@@ -165,16 +165,18 @@ public class Editcat_info extends AppCompatActivity {
                         || cat_weight.matches("1") || health_check_date.matches("") || latest_donation.matches("")){
                     Toast.makeText(getApplicationContext(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
                 } else {
-                    UpdateCat(cat_id,cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation);
-                    Intent ok = new Intent(Editcat_info.this, User_Cat_list.class);
-                    startActivity(ok);
+                    if (blood_type.equals("A") || blood_type.equals("B") || blood_type.equals("AB")){
+                        if (Integer.parseInt(cat_bd) < 3 || Integer.parseInt(cat_weight) < 3){
+                            Toast.makeText(getApplicationContext(),"แมวของคุณต้องมีน้ำหนัก 3 kg และอายุ 3 ปีขึ้นไป",Toast.LENGTH_LONG).show();
+                        }else {
+                            UpdateCat(cat_id, cat_name, cat_type, blood_type, cat_bd, cat_weight, health_check_date, latest_donation);
+                            Intent ok = new Intent(Editcat_info.this, User_Cat_list.class);
+                            startActivity(ok);
+                        }
+                    }else {
+                        Toast.makeText(getApplicationContext(),"กรุณากรอกข้อมมูลเป็น A,B,AB เท่านั้น", Toast.LENGTH_LONG).show();
+                    }
                 }
-                if (blood_type.equals("A") || blood_type.equals("B") || blood_type.equals("AB")){
-
-                }else {
-                    Toast.makeText(getApplicationContext(),"กรุณากรอกข้อมมูลเป็น A,B,AB เท่านั้น", Toast.LENGTH_LONG).show();
-                }
-
             }
         });
 
