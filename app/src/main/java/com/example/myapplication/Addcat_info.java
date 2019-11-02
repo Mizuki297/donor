@@ -164,6 +164,7 @@ public class Addcat_info extends AppCompatActivity {
                                   @Override
                                   public void onFailure(@NotNull UploadcareApiException e) {
                                       System.out.println(e.getMessage());
+                                      Toast.makeText(getApplicationContext(),"อัพโหลดไม่สำเร็จ กรุณาลองอีกครั้ง",Toast.LENGTH_LONG).show();
                                       progressDialog.dismiss();
                                   }
 
