@@ -122,12 +122,13 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view11" />
+
     <View
         android:id="@+id/view10"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toTopOf="@+id/view11"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,6 +144,7 @@
         android:textColor="#020202"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
+        app:layout_constraintEnd_toStartOf="@+id/date"
         app:layout_constraintStart_toStartOf="@+id/view10"
         app:layout_constraintTop_toTopOf="@+id/view10" />
 
@@ -150,11 +152,12 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="@string/yyyy_mm_dd"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintEnd_toStartOf="@+id/cal1"
+        app:layout_constraintStart_toEndOf="@id/datetext"
         app:layout_constraintTop_toTopOf="@+id/view10" />
 
     <ImageView
@@ -165,6 +168,7 @@
         android:contentDescription="@string/calicon"
         app:layout_constraintBottom_toBottomOf="@+id/view10"
         app:layout_constraintEnd_toEndOf="@+id/view10"
+        app:layout_constraintStart_toEndOf="@id/date"
         app:layout_constraintTop_toTopOf="@+id/view10"
         app:srcCompat="@drawable/cal" />
 
@@ -172,8 +176,8 @@
         android:id="@+id/view11"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -189,6 +193,7 @@
         android:textColor="#020202"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view11"
+        app:layout_constraintEnd_toStartOf="@+id/blooddate"
         app:layout_constraintStart_toStartOf="@+id/view11"
         app:layout_constraintTop_toTopOf="@+id/view11" />
 
@@ -196,11 +201,12 @@
         android:id="@+id/blooddate"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="@string/yyyy_mm_dd"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view11"
         app:layout_constraintEnd_toStartOf="@+id/cal2"
+        app:layout_constraintStart_toEndOf="@id/blooddatetext"
         app:layout_constraintTop_toTopOf="@+id/view11" />
 
     <ImageView
@@ -211,6 +217,7 @@
         android:contentDescription="@string/callicon"
         app:layout_constraintBottom_toBottomOf="@+id/view11"
         app:layout_constraintEnd_toEndOf="@+id/view11"
+        app:layout_constraintStart_toEndOf="@id/blooddate"
         app:layout_constraintTop_toTopOf="@+id/view11"
         app:srcCompat="@drawable/cal" />
 
@@ -260,8 +267,8 @@
 
     <ImageView
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/manu"
         android:cropToPadding="true"
