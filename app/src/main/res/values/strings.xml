@@ -90,4 +90,6 @@
     <string name="yyyy_mm_dd">yyyy/mm/dd</string>
     <string name="calicon">calIcon</string>
     <string name="callicon">callIcon</string>
+    <string name="add_coin">(เติมเงิน)</string>
+    <string name="addcoin">เติมเงิน</string>
 </resources>

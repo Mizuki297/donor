@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View button_add,button_user;
 
-    private TextView name,coin;
+    private TextView name,coin,addCoin;
 
     private Session session;
 
@@ -80,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
         View henderView = navigationView.getHeaderView(0);
         name = (TextView) henderView.findViewById(R.id.menu_username);
         coin = (TextView) henderView.findViewById(R.id.menu_coin);
+
+        addCoin = (TextView) henderView.findViewById(R.id.add_coin);
+        addCoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Add_Money.class);
+                startActivity(intent);
+            }
+        });
 
         search = (Button) findViewById(R.id.search_button);
 
@@ -132,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         getUser(session.getUserId());
+        updateData();
 
         radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
 
@@ -220,6 +230,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<HospitalModel>> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+    private void updateData(){
+        Call<Void> call = phpServiceAPI.update_data();
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("update cat");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });

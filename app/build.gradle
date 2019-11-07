@@ -12,22 +12,22 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String",'BASE_URL','"https://glyphographic-runwa.000webhostapp.com"'
-            buildConfigField "String",'UPLOADCARE_PUB_KEY','"92f32da1d27ff7f9dd3e"'
-            buildConfigField "String",'UPLOADCARE_PRI_KEY','"9bba465fb804fc9811bc"'
+            buildConfigField "String", 'BASE_URL', '"https://glyphographic-runwa.000webhostapp.com"'
+            buildConfigField "String", 'UPLOADCARE_PUB_KEY', '"92f32da1d27ff7f9dd3e"'
+            buildConfigField "String", 'UPLOADCARE_PRI_KEY', '"9bba465fb804fc9811bc"'
         }
 
         staging {
-            buildConfigField "String",'BASE_URL','"https://glyphographic-runwa.000webhostapp.com"'
-            buildConfigField "String",'UPLOADCARE_PUB_KEY','"92f32da1d27ff7f9dd3e"'
-            buildConfigField "String",'UPLOADCARE_PRI_KEY','"9bba465fb804fc9811bc"'
+            buildConfigField "String", 'BASE_URL', '"https://glyphographic-runwa.000webhostapp.com"'
+            buildConfigField "String", 'UPLOADCARE_PUB_KEY', '"92f32da1d27ff7f9dd3e"'
+            buildConfigField "String", 'UPLOADCARE_PRI_KEY', '"9bba465fb804fc9811bc"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String",'BASE_URL','"https://glyphographic-runwa.000webhostapp.com"'
-            buildConfigField "String",'UPLOADCARE_PUB_KEY','"92f32da1d27ff7f9dd3e"'
-            buildConfigField "String",'UPLOADCARE_PRI_KEY','"9bba465fb804fc9811bc"'
+            buildConfigField "String", 'BASE_URL', '"https://glyphographic-runwa.000webhostapp.com"'
+            buildConfigField "String", 'UPLOADCARE_PUB_KEY', '"92f32da1d27ff7f9dd3e"'
+            buildConfigField "String", 'UPLOADCARE_PRI_KEY', '"9bba465fb804fc9811bc"'
         }
     }
     useLibrary('org.apache.http.legacy')

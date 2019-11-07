@@ -67,6 +67,7 @@ public class Editcat_info extends AppCompatActivity {
         imageblack = (ImageView) findViewById(R.id.imageblack);
         menu = (ImageView) findViewById(R.id.menu);
 
+        getCurrentDateTime();
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 

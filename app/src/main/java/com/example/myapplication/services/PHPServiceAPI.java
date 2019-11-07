@@ -17,6 +17,9 @@ import retrofit2.http.POST;
 //เรียกการส่ง api
 public interface PHPServiceAPI {
 
+    @POST("/api/donor_startus.php")
+    Call<Void> update_data();
+
     @GET("/api/get_post_hpt.php")
     Call<List<HospitalModel>> getHospital();
 
@@ -126,5 +129,12 @@ public interface PHPServiceAPI {
             @Field("old_pass")String old_pass,
             @Field("password")String password
     );
+    @FormUrlEncoded
+    @POST("api/add_coin.php")
+    Call<UserModel> add_coin(
+            @Field("user_id")String user_id,
+            @Field("coin")int coin
+    );
+
 
 }

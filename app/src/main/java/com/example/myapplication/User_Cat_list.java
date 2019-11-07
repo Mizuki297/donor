@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -42,7 +44,7 @@ public class User_Cat_list extends AppCompatActivity {
     private ImageView back,plus,search,personal;
     private ListView listview;
 
-    private TextView name,coin;
+    private TextView name,coin,add_coin;
 
     public static final String USER_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
 
@@ -61,6 +63,14 @@ public class User_Cat_list extends AppCompatActivity {
        View henderView = navigationView.getHeaderView(0);
        name = (TextView) henderView.findViewById(R.id.menu_username);
        coin = (TextView) henderView.findViewById(R.id.menu_coin);
+       add_coin = (TextView) henderView.findViewById(R.id.add_coin);
+       add_coin.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(User_Cat_list.this,Add_Money.class);
+               startActivity(intent);
+           }
+       });
 
        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
@@ -73,6 +83,7 @@ public class User_Cat_list extends AppCompatActivity {
        listview = (ListView) findViewById(R.id.listview);
 
        getUser(session.getUserId());
+       updateData();
 
        appBarConfiguration = new AppBarConfiguration.Builder(
                R.id.menu_update_user
@@ -238,15 +249,28 @@ public class User_Cat_list extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (num.equals("0")){
-                            GradientDrawable gradientDrawable = (GradientDrawable)str_atc.getBackground().mutate();
-                            gradientDrawable.setColor(getColor(R.color.red));
-                            num = "1";
-                            Update_Status(thisCatmodel.getCat_id(),num);
+////                            GradientDrawable gradientDrawable = (GradientDrawable)str_atc.getBackground().mutate();
+////                            gradientDrawable.setColor(getColor(R.color.red));
+////                            num = "1";
+////                            Update_Status(thisCatmodel.getCat_id(),num);
                         }else  if (num.equals("1")){
-                            GradientDrawable gradientDrawable = (GradientDrawable)str_atc.getBackground().mutate();
-                            gradientDrawable.setColor(getColor(R.color.white));
-                            num = "0";
-                            Update_Status(thisCatmodel.getCat_id(),num);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(User_Cat_list.this);
+                            builder.setTitle("Update ข้อมูลแมว?");
+                            builder.setMessage("แมวของคุณได้บริจาคเลือดแล้ว");
+                            builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    GradientDrawable gradientDrawable = (GradientDrawable) str_atc.getBackground().mutate();
+                                    gradientDrawable.setColor(getColor(R.color.white));
+                                    num = "0";
+                                    Update_Status(thisCatmodel.getCat_id(),num);
+                                }
+                            });
+                            builder.setNegativeButton("ยกเลิก",null);
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+
                         }
                     }
                 });
@@ -268,6 +292,21 @@ public class User_Cat_list extends AppCompatActivity {
        Intent intent = new Intent(this,Editcat_info.class);
        intent.putExtra(USER_CAT_ID,id);
        startActivity(intent);
-   }
+    }
+    private void updateData(){
+        Call<Void> call = phpServiceAPI.update_data();
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("update cat");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
 }
 
