@@ -44,7 +44,7 @@ public class User_Cat_list extends AppCompatActivity {
     private ImageView back,plus,search,personal;
     private ListView listview;
 
-    private TextView name,coin,add_coin;
+    private TextView name,coin,add_coin,username;
 
     public static final String USER_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
 
@@ -71,6 +71,7 @@ public class User_Cat_list extends AppCompatActivity {
                startActivity(intent);
            }
        });
+       username = (TextView) findViewById(R.id.name);
 
        phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
@@ -169,6 +170,7 @@ public class User_Cat_list extends AppCompatActivity {
                 UserModel userInfo = response.body();
                 name.setText(userInfo.getUser_name());
                 coin.setText(userInfo.getMoney_coin());
+                username.setText(userInfo.getUser_name());
             }
 
             @Override

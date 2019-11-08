@@ -47,7 +47,7 @@
     <string name="ok">ยืนยัน</string>
     <string name="_111">111</string>
     <string name="image">TODO</string>
-    <string name="registered_cat">แมวที่ลงทะเบียนไว้</string>
+    <string name="registered_cat">แมวของ</string>
     <string name="plas">เพิ่ม</string>
     <string name="add_up">เแก้ไข</string>
     <string name="pesonal">ข้อมูลส่วนตัว</string>
@@ -92,4 +92,5 @@
     <string name="callicon">callIcon</string>
     <string name="add_coin">(เติมเงิน)</string>
     <string name="addcoin">เติมเงิน</string>
+    <string name="select">ค้นหาข้อมูลแมว</string>
 </resources>
