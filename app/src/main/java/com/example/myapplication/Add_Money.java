@@ -95,8 +95,6 @@ public class Add_Money extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
-                Toast.makeText(getApplicationContext(),"เติมเงินสำเร็จ",Toast.LENGTH_LONG).show();
-
             }
 
             @Override
@@ -104,6 +102,7 @@ public class Add_Money extends AppCompatActivity {
 
             }
         });
+        Toast.makeText(getApplicationContext(),"เติมเงินสำเร็จ",Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }

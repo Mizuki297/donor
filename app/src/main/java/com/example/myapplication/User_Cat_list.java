@@ -255,6 +255,7 @@ public class User_Cat_list extends AppCompatActivity {
 ////                            gradientDrawable.setColor(getColor(R.color.red));
 ////                            num = "1";
 ////                            Update_Status(thisCatmodel.getCat_id(),num);
+                            Toast.makeText(getApplicationContext(),"แมวของคุณยังไม่พร้อมบริจาคเลือด",Toast.LENGTH_LONG).show();
                         }else  if (num.equals("1")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(User_Cat_list.this);
                             builder.setTitle("Update ข้อมูลแมว?");
