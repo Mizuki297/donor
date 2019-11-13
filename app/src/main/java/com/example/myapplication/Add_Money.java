@@ -44,8 +44,6 @@ public class Add_Money extends AppCompatActivity {
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
-
-
         add_coin = (TextView) findViewById(R.id.Coin);
 
         back = (ImageView) findViewById(R.id.imageView6);
