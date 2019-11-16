@@ -221,6 +221,7 @@ public class User_Cat_list extends AppCompatActivity {
                 View row = layoutInflater.inflate(R.layout.row_list, parent, false);
                 ImageView image = row.findViewById(R.id.imageView5);
                 TextView name_cat = row.findViewById(R.id.menu_username);
+                TextView count = row.findViewById(R.id.countdown);
 
                 Button status = row.findViewById(R.id.heart1);
                 Button fix = row.findViewById(R.id.edit1);
@@ -240,6 +241,13 @@ public class User_Cat_list extends AppCompatActivity {
                 }
 
                 System.out.println(thisCatmodel.getStatus_cat());
+                System.out.println(thisCatmodel.getCount());
+
+                if (thisCatmodel.getCount() < 0){
+                    count.setText("พร้อมบริจาค");
+                }else {
+                    count.setText("เหลือ " + thisCatmodel.getCount() + " วัน");
+                }
 
                 if (thisCatmodel.getStatus_cat().equals("1")){
                     gradientDrawable.setColor(getColor(R.color.red));

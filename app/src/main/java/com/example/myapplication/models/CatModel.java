@@ -39,6 +39,9 @@ public class CatModel {
     @SerializedName("user_tel")
     private String user_tel;
 
+    @SerializedName("countdown")
+    private int count;
+
 
     public CatModel(
             String cat_id,
@@ -52,7 +55,8 @@ public class CatModel {
             String latest_donation,
             String status_cat,
             String user_line_id,
-            String user_tel
+            String user_tel,
+            int count
     ) {
         this.cat_id = cat_id;
         this.cat_name = cat_name;
@@ -66,6 +70,7 @@ public class CatModel {
         this.status_cat = status_cat;
         this.user_line_id = user_line_id;
         this.user_tel = user_tel;
+        this.count = count;
     }
 
     public String getCat_id() {
@@ -162,5 +167,13 @@ public class CatModel {
 
     public void setUser_tel(String user_tel) {
         this.user_tel = user_tel;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

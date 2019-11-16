@@ -32,6 +32,8 @@ public class CatGridAdapter extends AppCompatActivity {
 
     public ImageView back;
 
+    private Session session;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,9 @@ public class CatGridAdapter extends AppCompatActivity {
         final String getHPT_name = getIntent().getExtras().getString("HPT_name");
         final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
-        Call<List<CatModel>> call = phpServiceAPI.getcat_list(getHPT_name, getBlood_type);
+        session = new Session(getApplicationContext());
+
+        Call<List<CatModel>> call = phpServiceAPI.getcat_list(getHPT_name, getBlood_type, session.getUserId());
 
         call.enqueue(new Callback<List<CatModel>>() {
             @Override

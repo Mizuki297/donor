@@ -107,8 +107,8 @@ public class PayDataCat extends AppCompatActivity {
         });
         Toast.makeText(getApplicationContext(),"ชำระเงินสำเร็จ",Toast.LENGTH_SHORT).show();
     }
-    private void numCat(String getUserID,String getHPT_name,String getBlood_type) {
-        Call<NumCatModel> call = phpServiceAPI.numCat(getUserID,getHPT_name,getBlood_type);
+    private void numCat(String UserID,String getHPT_name,String getBlood_type) {
+        Call<NumCatModel> call = phpServiceAPI.numCat(UserID,getHPT_name,getBlood_type);
         //รอการตอบกลับจาก API
         call.enqueue(new Callback<NumCatModel>() {
             @Override

@@ -257,6 +257,7 @@ public class Addcat_info extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
                         month = month +1;
                         hcd.setText(year+"/"+month+"/"+day);
                         System.out.println(hcd.getText());
@@ -264,6 +265,7 @@ public class Addcat_info extends AppCompatActivity {
                         System.out.println(health_check_date);
                     }
                 },intYear,intMonth,intDay);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
     private void showDateDialog1(){
@@ -278,6 +280,7 @@ public class Addcat_info extends AppCompatActivity {
                         System.out.println(latest_donation);
                     }
                 },intYear,intMonth,intDay);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
 }

@@ -233,6 +233,7 @@ public class Editcat_info extends AppCompatActivity {
                         System.out.println(health_check_date);
                     }
                 },intYear,intMonth,intDay);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
     private void showDateDialog1(){
@@ -247,6 +248,7 @@ public class Editcat_info extends AppCompatActivity {
                         System.out.println(latest_donation);
                     }
                 },intYear,intMonth,intDay);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
 }
