@@ -22,8 +22,7 @@ public class Update_userData extends AppCompatActivity {
 
     private PHPServiceAPI phpServiceAPI;
 
-    private EditText name,lastname,tel;
-    private TextView lineid;
+    private EditText name,lastname,tel,lineid;
     private Button ok;
     private ImageView back;
 
@@ -43,7 +42,7 @@ public class Update_userData extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         lastname = (EditText) findViewById(R.id.lastname);
         tel = (EditText) findViewById(R.id.tel);
-        lineid = (TextView) findViewById(R.id.lineid);
+        lineid = (EditText) findViewById(R.id.lineid);
         ok = (Button) findViewById(R.id.ok);
         back = (ImageView)findViewById(R.id.back_icon);
 

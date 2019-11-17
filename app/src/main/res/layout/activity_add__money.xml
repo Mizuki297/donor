@@ -74,10 +74,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:autofillHints=""
-        android:ems="5"
         android:gravity="center"
         android:hint="@string/addcoin"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
