@@ -255,7 +255,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/lineback"
-        app:layout_constraintBottom_toTopOf="@+id/Tell"
+        app:layout_constraintBottom_toTopOf="@+id/view14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
@@ -271,17 +271,31 @@
         app:layout_constraintTop_toTopOf="@+id/view9"
         app:srcCompat="@drawable/line" />
 
-    <ImageView
-        android:id="@+id/Tell"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:contentDescription="@string/tell_button"
-        android:src="@drawable/phone"
+    <View
+        android:id="@+id/view14"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view9"></ImageView>
+        app:layout_constraintTop_toBottomOf="@id/view9" />
+
+    <ImageView
+        android:id="@+id/Tell"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/tell_button"
+        android:src="@drawable/phone"
+        app:layout_constraintBottom_toBottomOf="@+id/view14"
+        app:layout_constraintStart_toStartOf="@+id/view14"
+        app:layout_constraintTop_toTopOf="@+id/view14"></ImageView>
 
     <TextView
         android:id="@+id/textView4"

@@ -26,10 +26,10 @@ public class CatDetial extends AppCompatActivity {
 
     private TextView cat_name, cat_type, cat_blood, cat_age, cat_weight, cat_Health_check_date, cat_Latest_donation, user_line_id;
 
-    private View line;
+    private View Tell,line;
 
 
-    private ImageView Tell, photo;
+    private ImageView photo;
 
 
     private String tel;
@@ -55,7 +55,7 @@ public class CatDetial extends AppCompatActivity {
         cat_Latest_donation = (TextView) findViewById(R.id.Cat_Latest_donation);
         user_line_id = (TextView) findViewById(R.id.Line);
         line = (View) findViewById(R.id.view9);
-        Tell = (ImageView) findViewById(R.id.Tell);
+        Tell = (View) findViewById(R.id.view14);
         photo = (ImageView) findViewById(R.id.Photocat);
 
         PHPServiceAPI phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
