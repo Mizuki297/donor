@@ -65,17 +65,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        session = new Session(getApplicationContext());
+        session = new Session(getApplicationContext());  //session เป็นคำสั่งในการไปดึงค่า user id มาใช้
         System.out.println(session.getUserId());
 
         if (session.getUserId().equals("") || session.getUserId() == null){
             Intent intent = new Intent(MainActivity.this,Login.class);
-            startActivity(intent);
+            startActivity(intent);    //ถ้าค่า session  ที่ดึงมามีค่าว่างหรือเท่ากับเนา  จะทำการเด้งไปที่หน้า Login
         }else{
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
-
-        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+         //หน้าเมนู
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);   //drawer layout คือการซ้อนหน้ากัน
         NavigationView navigationView = findViewById(R.id.nav_view);
         View henderView = navigationView.getHeaderView(0);
         name = (TextView) henderView.findViewById(R.id.menu_username);
@@ -102,49 +102,49 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button_user = findViewById(R.id.imageIcon_user);
-        button_user.setOnClickListener(new View.OnClickListener() {
+        button_user.setOnClickListener(new View.OnClickListener() {  //เมื่อกดปุ่มรูปคน จะมีแถบเมนูเลื่อนออกมาทางขวา
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.END);
+                drawerLayout.openDrawer(GravityCompat.END);   //GravityCompat.END  เมนูมาทางขวา
             }
         });
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.menu_update_user
+                R.id.menu_update_user   //ปุ่มเมนูทั้ง3ปุ่ม
                 ,R.id.menu_update_pass
                 ,R.id.menu_logout
         ).setDrawerLayout(drawerLayout).build();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {   //รายละเอียดในหน้าเมนู
                 switch (menuItem.getItemId()){
-                    case R.id.menu_update_user:
+                    case R.id.menu_update_user:   //แก้ไขข้อมูล
                         Toast.makeText(getApplicationContext(),"update user",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Update_userData.class);
                         startActivity(intent);
                         break;
-                    case R.id.menu_update_pass:
+                    case R.id.menu_update_pass:  //แก้ไขรหัสผ่าน
                         Toast.makeText(getApplicationContext(),"update pass",Toast.LENGTH_SHORT).show();
                         Intent intent2 = new Intent(MainActivity.this, Re_pass.class);
                         startActivity(intent2);
                         break;
-                    case R.id.menu_logout:
+                    case R.id.menu_logout:   //แแกจากระบบ
                         Toast.makeText(getApplicationContext(),"logout",Toast.LENGTH_SHORT).show();
                         session.clearUserId();
                         Intent intent3 = new Intent(MainActivity.this,Login.class);
                         startActivity(intent3);
                         break;
                 }
-                drawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();   //คำสั่งปิดกลับเข้าไปเมื่อกดเสร็จ
                 return true;
             }
         });
-        getUser(session.getUserId());
-        updateData();
+        getUser(session.getUserId());  //ดึงข้อมูล user
+        updateData();   //อัพเดทสเตตัส
 
-        radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);
-
+        radioGroup = (RadioGroup) findViewById(R.id.bloodtype_group);  //ที่จิ๊กกรุ๊ปเลือดเป็นส่วนเชื่อมid
+        //ข้อมูล รพ
         hospitalList.add("กรุณาเลือกสถานที่รักษา");
         // Get HospitalModel list from api
         getHospitalList();
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void getUser(String user_id) {
+    private void getUser(String user_id) {  //ดึงข้อมูล ชื่อuser มาใช้
         Call<UserModel> call = phpServiceAPI.getUser(user_id);
 
         call.enqueue(new Callback<UserModel>() {

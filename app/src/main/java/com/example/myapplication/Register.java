@@ -45,6 +45,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private ImageView back;
 
     private ProgressDialog progressDialog;
+    //เป็นการประกาศตัวแปร มีการใช้เซอร์วิสเอพีไอ มีการเเรียกใช้ลิสอาเรย์
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         bRegister = (Button) findViewById(R.id.bRegister);
         spinnerHospital = (Spinner) findViewById(R.id.etHospital);
         back = (ImageView) findViewById(R.id.back_icon);
+        //เป็นการรับค่าของตัวแปรชนิดนั้นๆ
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,15 +77,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 onBackPressed();
             }
         });
+        //การเซตปุ่มย้อนกลับ
 
         hospitalList.add("กรุณาเลือกโรงพยาบาล");
 
         getHospitalList();
+        //รับค่าลิสของโรงพยาบาล
 
         ArrayAdapter <String> adapter =
                 new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, hospitalList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHospital.setAdapter(adapter);
+        //เป็นส่วนของตัวอแดปเตอร์ที่ใช้สร้างอาเรย์ลิสหรือดร็อปดาวน์ของโรงพยาบาล
 
         spinnerHospital.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -99,7 +104,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     }
                 }
         );
+        //เป็นการแสดงส่วนของส่วนของประกอบต่างๆของรีจิสเตอร์เช่นโรงพยาบาล
+
         bRegister.setOnClickListener(this);
+        //รีจิสเตอร์ออนคลิ๊ก
     }
 
 
@@ -115,16 +123,19 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 user_email = etEmail.getText().toString();
                 user_tel = etTel.getText().toString();
                 user_line_id = etLineID.getText().toString();
+                //เป็นการใช้เก็ตเก็บค่าตัวแปร
 
                 if (user_name.matches("") || user_s_name.matches("")
                 || username.matches("") || password.matches("")
                 || confirm_password.matches("") || user_email.matches("")
                 || user_tel.matches("") || user_line_id.matches("") || HPT_name.equals("กรุณาเลือกโรงพยาบาล")){
                     Toast.makeText(getApplicationContext(),"กรุณากรอกข้อมูลให้ครบ",Toast.LENGTH_SHORT).show();
+                    //กำหนดเงื่อนไขให้ข้อมูลทุกช่องมีการดักข้อมูลไว้ ถ้ากรอกข้อมูลไม่ครบจะมีโทสขึ้นแสดงว่าให้กรอกให้ครบ
 
                 }else if (!password.equals(confirm_password)){
                     Toast.makeText(getApplicationContext(),"password ไมตรงกัน",Toast.LENGTH_SHORT).show();
                 }
+                //เป็นเงื่อนไขเอลอิฟในกรณีที่กรอกพาสเวิร์ดไม่ตรงกัน
 
                 else{
                     System.out.println(user_name + user_s_name +  username + password + confirm_password
@@ -133,6 +144,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     progressDialog.setCancelable(false);
                     Register();
                 }
+                //ถ้ารีจิสเตอร์เสร็จจะแสดงไดอาล็อกว่ารีจิสเตอร์เสร็จแล้วหรือไม่ผ่าน
 
                 break;
         }
@@ -156,11 +168,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                     hospitalList.add(post.getHPT_name());
                 }
+                //เรียกใช้ค่าของลิสโรงพยาบาลเมื่อมีการกำหนดค่าลิสเสร็จหนึ่งสองสามในส่วนอาร์เรย์อแดปเตอร์เสร็จแล้ว จะเป็นการทำงานหรือการเรสปอนด์ของส่วนเก็ตฮอสพิทอลลิสนี้
             }
 
             @Override
             public void onFailure(Call<List<HospitalModel>> call, Throwable t) {
                 System.out.println(t.getMessage());
+                //แสดงไดอาล็อกเมื่อรีจิสเตอร์
             }
         });
     }
@@ -182,12 +196,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     Intent intent = new Intent(Register.this,Login.class);
                     startActivity(intent);
                 }
+                //เป็นการทำงานของรีจิสเตอร์ถ้าค่าเท่ากับๆศูนย์คือไม่สำเร็จ จะมีไดอาล็อกขึ้นแสดงว่าไม่สามารถใช้ได้เช่นเพราะมีการใช้ซ้ำ
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
 
             }
+            //เป็นเมื่อผิดพลาดข้อมูลจะแสดงว่าออนเฟลเลอร์
         });
 
     }

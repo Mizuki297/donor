@@ -49,13 +49,13 @@ public class PayDataCat extends AppCompatActivity {
         System.out.println(getHPT_name);
         System.out.println(getBlood_type);
 
-        getCoin();
+        getCoin(); //แสดงเงินของ user
 
         user_coin = (TextView) findViewById(R.id.menu_coin);
 
         numCat_select = (TextView) findViewById(R.id.textView8);
 
-        numCat(session.getUserId(),getHPT_name,getBlood_type);
+        numCat(session.getUserId(),getHPT_name,getBlood_type);  // numCat  คือการแสดงผลการแมทย์ว่ามีเท่าไหร่
 
         back_icon = (ImageView) findViewById(R.id.imageView2);
         back_icon.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class PayDataCat extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"ไม่มีคนที่พล้อมบริจาคจะชำระเงินทำไม",Toast.LENGTH_SHORT).show();
                     }else {
                         updateCoin(session.getUserId());
-                        onNextSelect(getBlood_type, getHPT_name);
+                        onNextSelect(getBlood_type, getHPT_name);  //เปลี่ยนหน้าถัดไป
                     }
                 }
             }

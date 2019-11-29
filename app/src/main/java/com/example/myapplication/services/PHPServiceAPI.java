@@ -56,6 +56,7 @@ public interface PHPServiceAPI {
     Call<CatModel> getCatDetail(
             @Field("cat_id") String cat_id
     );
+    //ของหน้าล็อกอิน
     @FormUrlEncoded
     @POST("api/login.php")
     Call<LoginModel> login(
@@ -63,6 +64,7 @@ public interface PHPServiceAPI {
             @Field("password")String password
     );
 
+    //ของหน้ารีจิสเตอร์
     @FormUrlEncoded
     @POST("api/register.php")
     Call<UserModel> numUser(

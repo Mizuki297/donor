@@ -51,17 +51,17 @@ public class Addcat_info extends AppCompatActivity {
     private Uri uri = null;
     private String cat_name,cat_type,blood_type,cat_bd,cat_weight,health_check_date,latest_donation = "";
     private ImageView imageblack,cal1,cal2;
-    private int GALLERY_REQUEST_CODE = 1;
+    private int GALLERY_REQUEST_CODE = 1; // เรียกรูปมา 1 รูป
 
-    private int intDay,intMonth,intYear;
+    private int intDay,intMonth,intYear; // ตัวแปรวันเดือนปี
 
-    private String response_image = "";
+    private String response_image = ""; //ตัวรูปภาพ
 
-    private String file = "";
+    private String file = ""; //ตัวแปรเก็บรูปภาพ
 
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog; //ตัวloading
 
-    private Session session;
+    private Session session; //ประกาศค่าsession
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +69,9 @@ public class Addcat_info extends AppCompatActivity {
         setContentView(R.layout.activity_addcat_info);
 
         session = new Session(getApplicationContext());
-        System.out.println(session.getUserId());
+        System.out.println(session.getUserId()); //ประกาศค่าsesionมาเรียกใช้
 
+        //ตัวloading
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Progress");
         progressDialog.setMessage("Loading.....");
@@ -78,7 +79,7 @@ public class Addcat_info extends AppCompatActivity {
 
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
-        getCurrentDateTime();
+        getCurrentDateTime(); //ฟังก์ชันเรียกวัน
 
         name_cat = (EditText) findViewById(R.id.name_cat);
         name_type = (EditText) findViewById(R.id.name_type);
@@ -101,29 +102,29 @@ public class Addcat_info extends AppCompatActivity {
                 pickFromGallery();
 
             }
-        });
+        }); //คลิกเพิ่มรูปภาพ
 
         cat_name = name_cat.getText().toString();
-        System.out.println(cat_name);
+        System.out.println(cat_name); //เก็บชื่อแมวเป็นสริงแล้วเอาส์ปริ้นออกมา
 
         imageblack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent black1 = new Intent(Addcat_info.this, User_Cat_list.class);
-                startActivity(black1);
+                startActivity(black1); //กดปุ่มย้อนกลับ
             }
         });
 
         cal1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog();
+                showDateDialog(); //เลือกปกิทิน
             }
         });
         cal2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog1();
+                showDateDialog1(); //เลือกปกิทิน
             }
         });
 
@@ -132,8 +133,9 @@ public class Addcat_info extends AppCompatActivity {
             public void onClick(View view) {
 
                  progressDialog.show();
-                 progressDialog.setCancelable(false);
+                 progressDialog.setCancelable(false);//ตัวloading
 
+                 //เก็บค่าเป็นสตริงแล้วปรินออกมา
                   cat_name = name_cat.getText().toString();
                   System.out.println(cat_name);
                   cat_type = name_type.getText().toString();
@@ -145,18 +147,21 @@ public class Addcat_info extends AppCompatActivity {
 
                   if (file == ""){
                       Toast.makeText(getApplicationContext(),"กรุณาเลือกรูปภาพ", Toast.LENGTH_LONG).show();
-                      progressDialog.dismiss();
+                      progressDialog.dismiss(); //ถ้ารูปเป็นค่าว่างจะโชวืกรุราเลือกรูปภาพ
                   }else {
                       if (cat_name.matches("") || cat_type.matches("") || blood_type.matches("กรุ๊ปเลือด") || cat_bd.matches("1") || cat_weight.matches("2")
                               || cat_weight.matches("1") || health_check_date.matches("") || latest_donation.matches("")) {
                           Toast.makeText(getApplicationContext(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
+                          //กดหนดเงื่อนไขเช่นไม่ให้แคทเนมเป็นค่าว่าง น้ำหนังเป็นหนึ่ง ให้แสดงกรุณากรอกข้อมูลให้ครบ
                           progressDialog.dismiss();
                       } else {
 
                           if (Integer.parseInt(cat_bd) < 3 || Integer.parseInt(cat_weight) < 3){
                               progressDialog.dismiss();
                               Toast.makeText(getApplicationContext(),"แมวของคุณต้องมีน้ำหนัก 3 kg และอายุ 3 ปีขึ้นไป",Toast.LENGTH_LONG).show();
+                              //ถ้าน้ำหนักและอายุน้อยกว่าสามให้แสดง แมวของคุณต้องมีน้ำหนักสามกิโลกรัมและอายุสามปีขึ้นไป
                           }else {
+                              //อัพโหลดรูป
                               UploadcareClient client = new UploadcareClient(BuildConfig.UPLOADCARE_PUB_KEY, BuildConfig.UPLOADCARE_PRI_KEY);
                               Context context = getApplicationContext();
                               Uploader uploader = new FileUploader(client, uri, context).store(true);
@@ -166,6 +171,7 @@ public class Addcat_info extends AppCompatActivity {
                                       System.out.println(e.getMessage());
                                       Toast.makeText(getApplicationContext(),"อัพโหลดไม่สำเร็จ กรุณาลองอีกครั้ง",Toast.LENGTH_LONG).show();
                                       progressDialog.dismiss();
+                                      //ถ้าอัพโหลfailจะขึ้นว่า อัพโหลดไม่สำเร็จกรุณาลองอีกครั้ง
                                   }
 
                                   @Override
@@ -175,6 +181,7 @@ public class Addcat_info extends AppCompatActivity {
                                       if (response_image != null || response_image != "") {
                                           AddCat(cat_name, cat_type, blood_type, cat_bd, cat_weight, health_check_date, latest_donation, response_image);
                                           progressDialog.dismiss();
+                                          //อัพโหลดรูป ถ้าไม่เป็นnullหรือค่าว่าง จะอัพโหลดข้อมูลได้
                                       }
                                   }
                               });
@@ -185,6 +192,7 @@ public class Addcat_info extends AppCompatActivity {
         });
 
 
+        //ทำให้spinerใช้งานได้
         sapin.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -212,6 +220,7 @@ public class Addcat_info extends AppCompatActivity {
 
                 Intent ok = new Intent(Addcat_info.this, User_Cat_list.class);
                 startActivity(ok);
+                //ถ้ากดปุ่มยืนยันแล้วข้อมูลถูกต้องหมดจะขึ้นว่างบันทึกข้อมูลสำเร็จ และไปยังหน้าลิส
             }
 
             @Override
@@ -229,18 +238,19 @@ public class Addcat_info extends AppCompatActivity {
         String[] mimeTypes = {"image/jpeg","image/png"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
         startActivityForResult(intent,GALLERY_REQUEST_CODE);
+        //การกดเลือกรูปจากgalleryมาอัพโหลด
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData()!= null){
-            uri = data.getData();
+            uri = data.getData(); //เรียกรูปภาพ
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),uri);
-                image.setImageBitmap(bitmap);
-                file = uri.getPath();
+                image.setImageBitmap(bitmap); //แปลงรูปมาที่Bitmap
+                file = uri.getPath(); //ที่อยู่รูปภาพ
             }
             catch (IOException e){
-                e.printStackTrace();
+                e.printStackTrace(); //ถ้าอัพโหลรูปแล้วผิดพลาดจะขึ้นeror
             }
         }
     }
@@ -258,11 +268,11 @@ public class Addcat_info extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                        month = month +1;
+                        month = month +1; //เดือนบวกหนึ่งเพราะปกติเดือนแรกจะนับที่ศูนย์ บวกหนึ่งจะได้สิบสองเดือนพอดี
                         hcd.setText(year+"/"+month+"/"+day);
-                        System.out.println(hcd.getText());
+                        System.out.println(hcd.getText()); //วันเดือนปีจะไปแสดงที่ year month day
                         health_check_date = hcd.getText().toString();
-                        System.out.println(health_check_date);
+                        System.out.println(health_check_date); //วัน เดือน ปี จะถุกเก็บอยู่ที่ health_check_date
                     }
                 },intYear,intMonth,intDay);
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
@@ -273,11 +283,11 @@ public class Addcat_info extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        month = month +1;
+                        month = month +1; //เดือนบวกหนึ่งเพราะปกติเดือนแรกจะนับที่ศูนย์ บวกหนึ่งจะได้สิบสองเดือนพอดี
                         ld.setText(year+"/"+month+"/"+day);
-                        System.out.println(ld.getText());
+                        System.out.println(ld.getText()); //วันเดือนปีจะไปแสดงที่ year month day
                         latest_donation = ld.getText().toString();
-                        System.out.println(latest_donation);
+                        System.out.println(latest_donation); //วัน เดือน ปี จะถุกเก็บอยู่ที่ latest_donation
                     }
                 },intYear,intMonth,intDay);
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());

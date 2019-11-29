@@ -26,6 +26,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private String username, password;
     private Session session;
     private ProgressDialog progressDialog;
+    //ส่วนประกาศตัวแปร PHPservice จะเป็นตัวเรียกค่าไว้ใช้ตรวจสอบ
 
 
     @Override
@@ -36,7 +37,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         session = new Session(getApplicationContext());
 
-        // Call get hospital
         phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
         progressDialog = new ProgressDialog(this);
@@ -49,9 +49,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         bLogin = (Button) findViewById(R.id.bLogin);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
 
-
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
+        //กองนี้เชื่อมส่วนต่างๆของหน้าUI
     }
 
     @Override
@@ -75,6 +75,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));
                 break;
+                //ส่วนของการทำงานซึ่งเป็นการกำหนดโดยการคลิ๊ก username password จะเป็นการรับค่าของสองตัวนี้ และมีการกำหนดเงื่อนไขif elseว่าถ้าค่าเป็นว่างจะขึ้นโทสว่าโปรดกรอกข้อมูล
+                //และมีเคสเงื่อนไขของการเข้าสู่หน้ารีจิสเตอร์ด้วย
         }
     }
         private void login(String username, String password){
@@ -94,8 +96,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         System.out.println(userInfo.description);
                         Toast.makeText(getApplicationContext(),userInfo.description,Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+                        //ตรวจสอบค่าถ้าไม่ใช่ศูนญ์ก็ไม่ใช่การเข้าล็อกอิน
                     }
                 }
+                //อันนี้จะเป็นเรียกใช้หน้าล็อกอินโมเดล เรียกใช้หน้าพีเอชพีเซอร์วิส ทำงานบนออนเรสปอนด์ถ้าค่าเท่ากับๆศูนย์จะเป็นการล็อกอิน
 
                 @Override
                 public void onFailure(Call<LoginModel> call, Throwable t) {
@@ -103,6 +107,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     System.out.println(t.getMessage());
 
                 }
+                //เมื่อเป็นเหลเลอร์ข้อมูลจะโทสออกมาแสดงว่าข้อมูลที่กรอกผิดพลาด
             });
         }
 }

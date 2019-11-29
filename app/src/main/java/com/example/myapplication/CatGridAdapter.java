@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class CatGridAdapter extends AppCompatActivity {
 
-    public static  final  String EXTRA_CAT_ID = "com.example.myapplication.EXTRA_TEXT";
+    public static  final  String EXTRA_CAT_ID = "com.example.myapplication.EXTRA_TEXT";  //ดึง catid มาเป็น extra text เพื่อส่งต่อ
 
     public ImageView back;
 
@@ -42,7 +42,7 @@ public class CatGridAdapter extends AppCompatActivity {
 
         PHPServiceAPI phpServiceAPI = RetrofitInstance.getRetrofitInstance().create(PHPServiceAPI.class);
 
-        final String getHPT_name = getIntent().getExtras().getString("HPT_name");
+        final String getHPT_name = getIntent().getExtras().getString("HPT_name");   //รับค่า hpt  กับ blood
         final String getBlood_type = getIntent().getExtras().getString("blood_type");
 
         session = new Session(getApplicationContext());
@@ -52,7 +52,7 @@ public class CatGridAdapter extends AppCompatActivity {
         call.enqueue(new Callback<List<CatModel>>() {
             @Override
             public void onResponse(Call<List<CatModel>> call, Response<List<CatModel>> response) {
-                populateGridView(response.body());
+                populateGridView(response.body());  //เรียกใช้ฟังชันเพื่อเข้า กิตวิว
             }
 
             @Override
@@ -83,12 +83,12 @@ public class CatGridAdapter extends AppCompatActivity {
         @Override
         public int getCount() {
             return catModels.size();
-        }
+        }   //จำนวนการนับ
 
         @Override
         public Object getItem(int pos) {
             return catModels.get(pos);
-        }
+        } //
 
         @Override
         public long getItemId(int pos) {
@@ -113,8 +113,8 @@ public class CatGridAdapter extends AppCompatActivity {
 
             final CatModel thisCatModel = catModels.get(position);
 
-            catName.setText(thisCatModel.getCat_name());
-
+            catName.setText(thisCatModel.getCat_name());  //ไปเอาชื่อมาแสดง
+            //การดึงรูปภาพมาแสดง
             if (thisCatModel.getUrl_cat() != null && thisCatModel.getUrl_cat().length() > 0) {
                 Picasso.get().load(thisCatModel.getUrl_cat()).placeholder(R.drawable.placeholder_img).into(catImg);
             } else {
@@ -126,7 +126,7 @@ public class CatGridAdapter extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, thisCatModel.getCat_name(), Toast.LENGTH_SHORT).show();
-                    openMainActivity(thisCatModel.getCat_id());
+                    openMainActivity(thisCatModel.getCat_id());  //ส่งแคท ไอดี ไปค้นหาที่เหมือนกันเพื่อแสเง
                 }
             });
             return view;
